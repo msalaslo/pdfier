@@ -1,0 +1,73 @@
+package com.msl.pdfa.pdf.test;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URL;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xhtmlrenderer.util.XRLog;
+
+import com.msl.pdfa.pdf.TestConstants;
+import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
+import com.msl.pdfa.pdf.io.IOUtils;
+
+public class HTMLToPDFConverterTest {
+	
+	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverterTest.class);
+	
+    @Before
+    public void setUp() {
+    	System.getProperties().setProperty("xr.util-logging.loggingEnabled", "true");
+    	XRLog.setLoggingEnabled(true);
+    }
+
+	
+	@Test
+	public void testReadUrlToPDF(){
+		try{					
+			URL url = new URL("http://www.w3schools.com/css/default.asp");		  
+	        
+			String testResourcePath = HTMLToPDFConverterTest.class.getClassLoader().getResource(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE).getPath();
+			testResourcePath = testResourcePath.substring(0, testResourcePath.indexOf(TestConstants.HTML_CONFIRMATION_PAGE));
+		
+			File fileOut = new File(testResourcePath + "testReadUrlToPDF.pdf");
+			FileOutputStream outPDF = new FileOutputStream(fileOut);
+			
+			HTMLToPDFConverter.htmlToPDF(url, outPDF, "en-US", "JUnit test confirmation page");	
+			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
+			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
+			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);
+		}catch(Exception e){
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}	
+	
+	@Test
+	public void testConfirmationPageToPDF(){
+		try{					
+			InputStream html = HTMLToPDFConverterTest.class.getClassLoader().getResourceAsStream(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE);		  
+	        
+			String testResourcePath = HTMLToPDFConverterTest.class.getClassLoader().getResource(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE).getPath();
+			testResourcePath = testResourcePath.substring(0, testResourcePath.indexOf(TestConstants.HTML_CONFIRMATION_PAGE));
+		
+			File fileOut = new File(testResourcePath + "testConfirmationPageToPDF.pdf");
+			FileOutputStream outPDF = new FileOutputStream(fileOut);
+			
+			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF, "en-US", "JUnit test confirmation page");	
+			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
+			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
+			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);
+		}catch(Exception e){
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}	
+	
+		
+}

@@ -1,0 +1,15 @@
+<h1>Greeting</h1>
+<div ng-show="authenticated">
+    <p>The ID is {{controller.greeting.id}}</p>
+    <p>The content is {{controller.greeting.content}}</p>
+ <div ng-controller="pdfa">
+    <p>URL: <input type="text" name="url" value="www.google.com" ng-model="url"/></p>
+    <button ng-click="downloadPdf()">Submit</button>
+    <hr />
+    <object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" style="width: 100%; height: 400px;"></object>
+    
+</div>
+</div>
+<div  ng-show="!authenticated">
+    <p>Login to see your greeting</p>
+</div>
