@@ -26,6 +26,7 @@ public class HTMLTidier {
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(sourceUrl, htmlTidied);	
+			htmlTidied = JsoupTidier.tidyUp(htmlTidied);
 //			htmlTidied = HTMLPrintableUtil.parseImages(sourceUrl, htmlTidied);	
 			return htmlTidied;
 		} catch (Exception e) {
@@ -40,6 +41,7 @@ public class HTMLTidier {
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(requestUrl, htmlTidied);
+			htmlTidied = JsoupTidier.tidyUp(htmlTidied);
 //			htmlTidied = HTMLPrintableUtil.addInlineStyleSheets(IOUtils.getInputStream(htmlTidied), CSS_FILES);	
 			return htmlTidied;
 		} catch (Exception e) {
@@ -53,6 +55,7 @@ public class HTMLTidier {
 			String htmlTidied = HTMLSanitiser.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
+			htmlTidied = JsoupTidier.tidyUp(htmlTidied);
 //			htmlTidied = HTMLPrintableUtil.addInlineStyleSheets(IOUtils.getInputStream(htmlTidied), CSS_FILES);		
 			return htmlTidied;
 		} catch (Exception e) {

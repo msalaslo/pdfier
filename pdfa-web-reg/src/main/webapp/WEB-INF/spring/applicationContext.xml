@@ -42,6 +42,6 @@
 
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
-	<context:component-scan base-package="com.msl.pdfa.repository" />
+	<context:component-scan base-package="com.msl.pdfa.persistance" />
 	<context:component-scan base-package="com.msl.pdfa.service" />
 </beans>

@@ -1,4 +1,4 @@
-package com.pdfa.msl.webaj;
+package com.pdfa.msl.webaj.configuration;
 
 import java.security.Principal;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,16 +27,19 @@ import com.pdfa.msl.webaj.filter.CsrfHeaderFilter;
 
 @SpringBootApplication
 @RestController
-public class PdfaWebajApplication {
+@ComponentScan ("com.pdfa.msl")
+public class WebSecurityConfigurationApplication {
 
 	@Configuration
 	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.httpBasic().and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/")
-					.permitAll().anyRequest().authenticated().and()
-					.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+			http.httpBasic()
+			.and().authorizeRequests().antMatchers("/", "/index").permitAll().anyRequest().authenticated()
+			.and().formLogin().loginPage("/login").permitAll()
+            .and().logout().permitAll()
+			.and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 			http.csrf().csrfTokenRepository(csrfTokenRepository());
 		}
 	}
@@ -66,7 +70,7 @@ public class PdfaWebajApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(PdfaWebajApplication.class, args);
+		SpringApplication.run(WebSecurityConfigurationApplication.class, args);
 	}
 
 }

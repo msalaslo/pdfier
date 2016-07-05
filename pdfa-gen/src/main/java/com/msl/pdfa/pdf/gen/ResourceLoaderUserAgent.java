@@ -56,12 +56,6 @@ class ResourceLoaderUserAgent extends ITextUserAgent {
 					// connection = proxyUrl.openConnection(proxy);
 					connection = (HttpURLConnection) new URL(uri).openConnection();
 					connection.connect();
-
-				} catch (Exception e) {
-					logger.info("Error opening URL stream from classpath with uri" + uri, e);
-				}
-
-				try {
 					is = connection.getInputStream();
 				} catch (java.net.MalformedURLException e) {
 					logger.info("bad URL given: " + uri, e);
@@ -69,6 +63,8 @@ class ResourceLoaderUserAgent extends ITextUserAgent {
 					logger.info("item at URI " + uri + " not found");
 				} catch (java.io.IOException e) {
 					logger.info("IO problem for " + uri, e);
+				} catch (Exception e) {
+					logger.info("Error opening URL stream from classpath with uri" + uri, e);
 				}
 			}
 		}

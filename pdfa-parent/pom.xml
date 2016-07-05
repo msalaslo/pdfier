@@ -42,16 +42,7 @@
 			<artifactId>el-api</artifactId>
 			<version>2.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.6.1</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -103,6 +94,6 @@
 		<module>../pdfa-service</module>
 		<module>../pdfa-web-reg</module>
 		<module>../pdfa-webaj</module>
-		<module>../pdfa-repository</module>
+		
 	</modules>
 </project>
