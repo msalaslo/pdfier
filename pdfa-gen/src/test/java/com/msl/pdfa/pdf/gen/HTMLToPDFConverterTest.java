@@ -1,4 +1,4 @@
-package com.msl.pdfa.pdf.test;
+package com.msl.pdfa.pdf.gen;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,8 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.util.XRLog;
 
-import com.msl.pdfa.pdf.TestConstants;
-import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
+import com.msl.pdfa.pdf.TestUtil;
 import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverterTest {
@@ -30,12 +29,9 @@ public class HTMLToPDFConverterTest {
 	@Test
 	public void testReadUrlToPDF(){
 		try{					
-			URL url = new URL("http://www.w3schools.com/css/default.asp");		  
-	        
-			String testResourcePath = HTMLToPDFConverterTest.class.getClassLoader().getResource(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE).getPath();
-			testResourcePath = testResourcePath.substring(0, testResourcePath.indexOf(TestConstants.HTML_CONFIRMATION_PAGE));
+			URL url = new URL("https://jsoup.org/cookbook/cleaning-html/whitelist-sanitizer");		 
 		
-			File fileOut = new File(testResourcePath + "testReadUrlToPDF.pdf");
+			File fileOut = new File(TestUtil.getTestPath() + "testReadUrlToPDF.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			
 			HTMLToPDFConverter.htmlToPDF(url, outPDF, "en-US", "JUnit test confirmation page");	
@@ -51,12 +47,9 @@ public class HTMLToPDFConverterTest {
 	@Test
 	public void testConfirmationPageToPDF(){
 		try{					
-			InputStream html = HTMLToPDFConverterTest.class.getClassLoader().getResourceAsStream(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE);		  
-	        
-			String testResourcePath = HTMLToPDFConverterTest.class.getClassLoader().getResource(TestConstants.PDF_PATH + TestConstants.HTML_CONFIRMATION_PAGE).getPath();
-			testResourcePath = testResourcePath.substring(0, testResourcePath.indexOf(TestConstants.HTML_CONFIRMATION_PAGE));
+			InputStream html = TestUtil.getInputHtml();		  
 		
-			File fileOut = new File(testResourcePath + "testConfirmationPageToPDF.pdf");
+			File fileOut = new File(TestUtil.getTestPath() + "testConfirmationPageToPDF.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			
 			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF, "en-US", "JUnit test confirmation page");	
