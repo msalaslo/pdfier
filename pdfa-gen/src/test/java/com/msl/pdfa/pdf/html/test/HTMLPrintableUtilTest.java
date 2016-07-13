@@ -1,6 +1,7 @@
 package com.msl.pdfa.pdf.html.test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -72,6 +73,27 @@ public class HTMLPrintableUtilTest {
 			File resultFile = IOUtils.stringToFile(htmlCssInLine, file);
 			System.out.println("HTML Jericho Move css to HEAD saved in:" + resultFile.getAbsolutePath());
 			Assert.assertNotNull("HTML Jericho sanitized not null", htmlCssInLine);
+		}catch(Exception e){
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test 
+	public void testReplaceNbsp() {
+		try{			
+			InputStream inputHtml = new FileInputStream("C:\\temp\\pdfa-test1468254158152.html");
+			//String html = "<html><body><a href=\"/curso-de-liderazgo-publico\">· &nbsp;Curso de Liderazgo Público</a></body></html>";
+			String html = IOUtils.getStringFromInputStream(inputHtml);
+			Assert.assertTrue("HTML without &nbsp;", html.contains("&nbsp;"));
+			
+			String htmlResult = HTMLPrintableUtil.replaceNbsp(html);
+			
+			File file = new File(TestUtil.getTestPath() + "testReplaceNbsp.html");
+			
+			File resultFile = IOUtils.stringToFile(htmlResult, file);
+			System.out.println("HTML testReplaceNbsp:" + resultFile.getAbsolutePath());
+			Assert.assertTrue("HTML without &nbsp;", !htmlResult.contains("&nbsp;"));
 		}catch(Exception e){
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

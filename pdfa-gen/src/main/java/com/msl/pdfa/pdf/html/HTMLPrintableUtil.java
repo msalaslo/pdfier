@@ -49,6 +49,10 @@ public class HTMLPrintableUtil {
 		Source source = new Source(html);
 		return addMandatoryHtml(source);
 	}
+	
+	public static String replaceNbsp(String html) throws UtilException {
+		return html.replace("&nbsp;", " ");
+	}
 
 	public static String getMainContent(String html, String mainContentAttribute) throws UtilException {
 		Source source = new Source(html);
@@ -101,7 +105,37 @@ public class HTMLPrintableUtil {
 							if (!styleElement.getStartTag().isSyntacticalEmptyElementTag()) {
 								outputDocument.remove(styleElement.getEndTag());
 							}
+							String styleString = "<![CDATA[\n" + styleElement.getContent().toString() + "]]>";
+							outputDocument.replace(styleElement.getContent(), styleString);
 							outputDocument.insert(headElement.getEndTag().getBegin(), styleElement);
+						}
+					}
+					return outputDocument.toString();
+				}
+			}
+			return source.toString();
+		} catch (Exception e) {
+			logger.error("Error generating HTML printable", e);
+			throw new UtilException("Error generating HTML printable", e);
+		}
+	}
+	
+	public static String addCDATAToHeadStyleTags(String inputHTML) throws UtilException {
+		try {
+			Source source = new Source(inputHTML);
+			Element headElement = source.getFirstElement(HTMLElementName.HEAD);
+			if (headElement != null) {
+				List<Element> styleElements = headElement.getAllElements("style");
+				if (styleElements != null && styleElements.size() > 0) {
+					OutputDocument outputDocument = new OutputDocument(source);
+					for (Element styleElement : styleElements) {
+						if (styleElement != null) {
+							if(!styleElement.getContent().toString().startsWith("<![CDATA[")){
+								StringBuffer sb = new StringBuffer();
+								String styleSheetContent = "<![CDATA[\n" + styleElement.getContent().toString() + "]]>";
+								sb.append("<style type=\"text/css\">\n").append(styleSheetContent).append("\n</style>");
+								outputDocument.replace(styleElement, sb.toString());
+							}
 						}
 					}
 					return outputDocument.toString();
@@ -187,7 +221,7 @@ public class HTMLPrintableUtil {
 			styleSheetContent = Util.getString(new InputStreamReader(
 					HTMLPrintableUtil.class.getClassLoader().getResourceAsStream(cssFile), Charset.forName("UTF-8")));
 			sb.append(headElement.getStartTag().toString());
-			sb.append("<style type=\"text/css\">\n").append(styleSheetContent).append("\n</style>");
+			sb.append("<style type=\"text/css\">\n<![CDATA[\n").append(styleSheetContent).append("\n]]>\n</style>");
 			sb.append(headElement.getEndTag().toString());
 			outputDocument.replace(headElement, sb.append(headElement.getContent()));
 		} catch (Exception e) {

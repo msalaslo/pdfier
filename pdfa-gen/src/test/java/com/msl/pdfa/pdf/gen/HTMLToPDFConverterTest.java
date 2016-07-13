@@ -28,10 +28,12 @@ public class HTMLToPDFConverterTest {
 	
 	@Test
 	public void testReadUrlToPDF(){
-		try{					
-			URL url = new URL("https://jsoup.org/cookbook/cleaning-html/whitelist-sanitizer");		 
-		
-			File fileOut = new File(TestUtil.getTestPath() + "testReadUrlToPDF.pdf");
+		try{
+			
+			URL url = new URL("http://webaim.org/techniques/acrobat/");		 
+			File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+//			URL url = new URL("http://www.freedomscientific.com/Downloads/JAWS");		 
+//			File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			
 			HTMLToPDFConverter.htmlToPDF(url, outPDF, "en-US", "JUnit test confirmation page");	
