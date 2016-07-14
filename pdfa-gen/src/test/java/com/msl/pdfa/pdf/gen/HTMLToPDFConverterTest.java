@@ -30,8 +30,8 @@ public class HTMLToPDFConverterTest {
 	public void testReadUrlToPDF(){
 		try{
 			
-			URL url = new URL("http://webaim.org/techniques/acrobat/");		 
-			File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");		 
+			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
 //			URL url = new URL("http://www.freedomscientific.com/Downloads/JAWS");		 
 //			File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);

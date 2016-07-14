@@ -1,8 +1,11 @@
 package com.msl.pdfa.pdf.gen;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.StringBufferInputStream;
 import java.net.URL;
 
 import org.slf4j.Logger;
@@ -75,6 +78,7 @@ public class HTMLToPDFConverter {
 	}
 	
 	private static void generateFromHTML(String basePath, String htmlTidied, OutputStream outPDF, String language, String title) throws UtilException {
+		ByteArrayOutputStream baos = null;
 		try {
 			ITextRenderer renderer = new ITextRenderer();
 			ResourceLoaderUserAgent callback = new ResourceLoaderUserAgent(renderer.getOutputDevice());
@@ -84,11 +88,24 @@ public class HTMLToPDFConverter {
 			addFonts(renderer);
 			renderer.setDocumentFromString(htmlTidied, basePath);
 			renderer.layout();
+			// Para lanzar el sanitizador de PDF/UA
+//			baos = new ByteArrayOutputStream();
+//			renderer.createPDF(baos, language, title);
+//			PDFAccessibleSanitiser.manipulatePdf(new ByteArrayInputStream(baos.toByteArray()), outPDF);
+//			outPDF.close();
 			renderer.createPDF(outPDF, language, title);
 			outPDF.close();
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
 			throw new UtilException("Error generating PDF from html", e);
+		} finally{
+			if(baos != null){
+				try {
+					baos.close();
+				} catch (IOException e) {
+					// Nothing to do
+				}
+			}
 		}
 	}
 

@@ -2,7 +2,6 @@ package com.msl.pdfa.pdf.html;
 
 import java.net.URL;
 
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
