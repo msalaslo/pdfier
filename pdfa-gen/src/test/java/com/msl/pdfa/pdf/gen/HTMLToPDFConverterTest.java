@@ -29,14 +29,15 @@ public class HTMLToPDFConverterTest {
 	@Test
 	public void testReadUrlToPDF(){
 		try{
-			
-			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");		 
-			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
+			URL url = new URL("http://webaim.org/");		 
+			File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+//			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");		 
+//			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
 //			URL url = new URL("http://www.freedomscientific.com/Downloads/JAWS");		 
 //			File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			
-			HTMLToPDFConverter.htmlToPDF(url, outPDF, "en-US", "JUnit test confirmation page");	
+			HTMLToPDFConverter.htmlToPDF(url, outPDF);	
 			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
 			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
 			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);
@@ -54,7 +55,7 @@ public class HTMLToPDFConverterTest {
 			File fileOut = new File(TestUtil.getTestPath() + "testConfirmationPageToPDF.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			
-			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF, "en-US", "JUnit test confirmation page");	
+			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF);	
 			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
 			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
 			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);

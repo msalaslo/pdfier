@@ -1,11 +1,9 @@
 package com.msl.pdfa.pdf.gen;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.StringBufferInputStream;
 import java.net.URL;
 
 import org.slf4j.Logger;
@@ -22,62 +20,68 @@ import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverter {
 
+	private static boolean createDebugFiles = true;
+	
 	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverter.class);
 
 	public static final String[] FONTS = { "ARIAL.TTF", "TradeGothicLTStd.ttf", "TradeGothicLTStd-Bold.ttf", "TradeGothicLTStd-Light.ttf", "flysaa-icons.ttf"};
 
 	
-	public static void htmlToPDF(URL requestURL, String inputHTML, OutputStream outPDF, String language, String title) throws UtilException {
+	public static void htmlToPDF(URL requestURL, String inputHTML, OutputStream outPDF) throws UtilException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(requestURL, inputHTML);
-			IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
-			generatePDFFromHTML(requestURL, htmlTidied, outPDF, language, title);
+			if(createDebugFiles){
+				IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
+			}
+			generatePDFFromHTML(requestURL, htmlTidied, outPDF);
 		} catch (Exception e) {
 			logger.error("Error converting HTML to PDF", e);
 			throw new UtilException("Error converting HTML to PDF", e);
 		}
 	}
 	
-	public static void htmlToPDF(URL url, OutputStream outPDF, String language, String title) throws UtilException {
+	public static void htmlToPDF(URL url, OutputStream outPDF) throws UtilException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(url);
-			IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
-			generatePDFFromHTML(url, htmlTidied, outPDF, language, title);
+			if(createDebugFiles){
+				IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
+			}
+			generatePDFFromHTML(url, htmlTidied, outPDF);
 		} catch (Exception e) {
 			logger.error("Error converting HTML to PDF", e);
 			throw new UtilException("Error converting HTML to PDF", e);
 		}
 	}
 
-	public static void htmlToPDF(String inputHTML, OutputStream outPDF, String language, String title) throws UtilException {
+	public static void htmlToPDF(String inputHTML, OutputStream outPDF) throws UtilException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(inputHTML);
-			generateLocalPDFFromHTML(htmlTidied, outPDF, language, title);
+			generateLocalPDFFromHTML(htmlTidied, outPDF);
 		} catch (Exception e) {
 			logger.error("Error converting HTML to PDF", e);
 			throw new UtilException("Error converting HTML to PDF", e);
 		}
 	}
 
-	private static void generatePDFFromHTML(URL sourceUrl, String htmlTidied, OutputStream outPDF, String language, String title) throws UtilException {
+	private static void generatePDFFromHTML(URL sourceUrl, String htmlTidied, OutputStream outPDF) throws UtilException {
 		try {
-			generateFromHTML(sourceUrl.toString(), htmlTidied, outPDF, language, title);
+			generateFromHTML(sourceUrl.toString(), htmlTidied, outPDF);
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
 			throw new UtilException("Error generating PDF from html", e);
 		}
 	}
 	
-	private static void generateLocalPDFFromHTML(String htmlTidied, OutputStream outPDF, String language, String title) throws UtilException {
+	private static void generateLocalPDFFromHTML(String htmlTidied, OutputStream outPDF) throws UtilException {
 		try {
-			generateFromHTML(getBasePath(), htmlTidied, outPDF, language, title);
+			generateFromHTML(getBasePath(), htmlTidied, outPDF);
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
 			throw new UtilException("Error generating PDF from html", e);
 		}
 	}
 	
-	private static void generateFromHTML(String basePath, String htmlTidied, OutputStream outPDF, String language, String title) throws UtilException {
+	private static void generateFromHTML(String basePath, String htmlTidied, OutputStream outPDF) throws UtilException {
 		ByteArrayOutputStream baos = null;
 		try {
 			ITextRenderer renderer = new ITextRenderer();
@@ -93,7 +97,7 @@ public class HTMLToPDFConverter {
 //			renderer.createPDF(baos, language, title);
 //			PDFAccessibleSanitiser.manipulatePdf(new ByteArrayInputStream(baos.toByteArray()), outPDF);
 //			outPDF.close();
-			renderer.createPDF(outPDF, language, title);
+			renderer.createPDF(outPDF);
 			outPDF.close();
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
