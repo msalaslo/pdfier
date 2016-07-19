@@ -54,6 +54,8 @@ public class HTMLToPDFConverter {
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
+			htmlTidied = HTMLPrintableUtil.compactSource(htmlTidied);
+			htmlTidied = HTMLPrintableUtil.removeBlanksBetweenTags(htmlTidied);
 			if(createDebugFiles){
 				IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
 			}

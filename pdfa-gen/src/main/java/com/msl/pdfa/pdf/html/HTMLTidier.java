@@ -17,17 +17,14 @@ public class HTMLTidier {
 		try {
 			String htmlTidied = "";
 			try {
-				//htmlTidied = Util.getString(new InputStreamReader(sourceUrl.openStream()));
 				htmlTidied = HTTPClient.readUrlForPdf(sourceUrl.toURI());
 			} catch (Exception ex) {
 				logger.warn("Error adding external CSS to inline doc." + ex.getMessage());
 			}
 			htmlTidied = HTMLSanitiser.stripInvalidMarkup(htmlTidied, Constants.HTML_ELEMENTS_TO_STRIP);
-			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(sourceUrl, htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.addCDATAToHeadStyleTags(htmlTidied);	
-//			htmlTidied = HTMLPrintableUtil.parseImages(sourceUrl, htmlTidied);	
 			return htmlTidied;
 		} catch (Exception e) {
 			logger.error("Error tidying HTML", e);
@@ -41,7 +38,6 @@ public class HTMLTidier {
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(requestUrl, htmlTidied);
-//			htmlTidied = HTMLPrintableUtil.addInlineStyleSheets(IOUtils.getInputStream(htmlTidied), CSS_FILES);	
 			return htmlTidied;
 		} catch (Exception e) {
 			logger.error("Error tidying HTML", e);

@@ -28,6 +28,7 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.OutputDocument;
 import net.htmlparser.jericho.Source;
+import net.htmlparser.jericho.SourceCompactor;
 import net.htmlparser.jericho.StartTag;
 import net.htmlparser.jericho.Util;
 
@@ -52,6 +53,10 @@ public class HTMLPrintableUtil {
 	
 	public static String replaceNbsp(String html) throws UtilException {
 		return html.replace("&nbsp;", " ");
+	}
+	
+	public static String removeBlanksBetweenTags(String html) throws UtilException {
+		return html.replace("> <", "><");
 	}
 
 	public static String getMainContent(String html, String mainContentAttribute) throws UtilException {
@@ -314,6 +319,17 @@ public class HTMLPrintableUtil {
 			response.close();
 		}
 		return ret;
+	}
+	
+	public static String compactSource(String inputHTML) throws UtilException {
+		try {
+			Source source = new Source(inputHTML);
+			SourceCompactor sourceCompactor = new SourceCompactor(source);
+			return sourceCompactor.toString();
+		} catch (Exception e) {
+			logger.error("Error compacting HTML", e);
+			throw new UtilException("Error compacting HTML", e);
+		}
 	}
 
 
