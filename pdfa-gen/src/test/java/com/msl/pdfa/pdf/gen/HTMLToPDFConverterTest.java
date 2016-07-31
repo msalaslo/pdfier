@@ -16,54 +16,60 @@ import com.msl.pdfa.pdf.TestUtil;
 import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverterTest {
-	
-	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverterTest.class);
-	
-    @Before
-    public void setUp() {
-    	System.getProperties().setProperty("xr.util-logging.loggingEnabled", "true");
-    	XRLog.setLoggingEnabled(true);
-    }
 
-	
+	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverterTest.class);
+
+	@Before
+	public void setUp() {
+		System.getProperties().setProperty("xr.util-logging.loggingEnabled", "true");
+		XRLog.setLoggingEnabled(true);
+	}
+
 	@Test
-	public void testReadUrlToPDF(){
-		try{
-//			URL url = new URL("http://webaim.org/");		 
-//			File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
-			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");		 
+	public void testReadUrlToPDF() {
+		try {
+
+			// URL url = new
+			// URL("http://www.autocontrol.es/reclamaciones_online.aspx");
+			// File fileOut = new File(TestUtil.getTestPath() +
+			// "autocontrol.pdf");
+			// URL url = new URL("http://webaim.org/");
+			// File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");
 			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
-//			URL url = new URL("http://www.freedomscientific.com/Downloads/JAWS");		 
-//			File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
+			// URL url = new
+			// URL("http://www.freedomscientific.com/Downloads/JAWS");
+			// File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
-			
-			HTMLToPDFConverter.htmlToPDF(url, outPDF);	
+
+			HTMLToPDFConverter.htmlToPDF(url, outPDF);
 			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
 			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
-			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);
-		}catch(Exception e){
+			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion",
+					outPDF);
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
-	}	
-	
+	}
+
 	@Test
-	public void testConfirmationPageToPDF(){
-		try{					
-			InputStream html = TestUtil.getInputHtml();		  
-		
+	public void testConfirmationPageToPDF() {
+		try {
+			InputStream html = TestUtil.getInputHtml();
+
 			File fileOut = new File(TestUtil.getTestPath() + "testConfirmationPageToPDF.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
-			
-			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF);	
+
+			HTMLToPDFConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF);
 			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
 			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
-			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion", outPDF);
-		}catch(Exception e){
+			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion",
+					outPDF);
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
-	}	
-	
-		
+	}
+
 }

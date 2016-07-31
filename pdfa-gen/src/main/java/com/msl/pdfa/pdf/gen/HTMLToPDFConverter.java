@@ -114,7 +114,7 @@ public class HTMLToPDFConverter {
 //			renderer.createPDF(baos, language, title);
 //			PDFAccessibleSanitiser.manipulatePdf(new ByteArrayInputStream(baos.toByteArray()), outPDF);
 //			outPDF.close();
-			renderer.createPDF(outPDF);
+			renderer.createPDF(outPDF, language);
 			outPDF.close();
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
