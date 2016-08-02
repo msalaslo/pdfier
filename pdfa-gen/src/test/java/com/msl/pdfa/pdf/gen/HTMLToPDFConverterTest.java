@@ -33,10 +33,10 @@ public class HTMLToPDFConverterTest {
 			// URL("http://www.autocontrol.es/reclamaciones_online.aspx");
 			// File fileOut = new File(TestUtil.getTestPath() +
 			// "autocontrol.pdf");
-			// URL url = new URL("http://webaim.org/");
-			// File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
-			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");
-			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
+			 URL url = new URL("http://webaim.org/training/");
+			 File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+//			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");
+//			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
 			// URL url = new
 			// URL("http://www.freedomscientific.com/Downloads/JAWS");
 			// File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
