@@ -1,5 +1,6 @@
 package com.msl.pdfa.pdf.gen;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import com.msl.pdfa.pdf.io.IOUtils;
 public class HTMLToPDFConverter {
 
 	private static boolean createDebugFiles = true;
+	
+	private static boolean sanitizePdf = false;
 	
 	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverter.class);
 
@@ -109,17 +112,25 @@ public class HTMLToPDFConverter {
 			addFonts(renderer);
 			renderer.setDocumentFromString(htmlTidied, basePath);
 			renderer.layout();
-			// Para lanzar el sanitizador de PDF/UA
-//			baos = new ByteArrayOutputStream();
-//			renderer.createPDF(baos, language, title);
-//			PDFAccessibleSanitiser.manipulatePdf(new ByteArrayInputStream(baos.toByteArray()), outPDF);
-//			outPDF.close();
-			renderer.createPDF(outPDF, language);
-			outPDF.close();
+			if(sanitizePdf){
+				// Para lanzar el sanitizador de PDF/UA
+				baos = new ByteArrayOutputStream();
+				renderer.createPDF(baos, language);
+				PDFAccessibleSanitiser.manipulatePdf(new ByteArrayInputStream(baos.toByteArray()), outPDF);
+			}else{
+				renderer.createPDF(outPDF, language);
+			}
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
 			throw new UtilException("Error generating PDF from html", e);
 		} finally{
+			if(outPDF != null){
+				try {
+					outPDF.close();
+				} catch (IOException e) {
+					// Nothing to do
+				}
+			}
 			if(baos != null){
 				try {
 					baos.close();
