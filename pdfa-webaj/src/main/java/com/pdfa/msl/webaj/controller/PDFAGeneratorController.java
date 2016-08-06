@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.msl.pdfa.pdf.exception.UtilException;
+import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
 import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
 
 @RestController
@@ -32,7 +32,7 @@ public class PDFAGeneratorController {
 			HttpServletRequest request, HttpServletResponse response) {
 		try{
 			if(url != null){
-				genPDF(new URL(url), "en", "pdfa", response);
+				genPDF(new URL(url), response);
 			}else{
 				logger.warn("url param can not be null");
 			}
@@ -47,7 +47,7 @@ public class PDFAGeneratorController {
 	public HttpServletResponse pdfaHtml(@RequestParam("html") String html,
 			HttpServletRequest request, HttpServletResponse response) {
 		try{
-			genPDF(new URL(request.getRequestURL().toString()), html, "en", "pdfa", response);
+			genPDF(new URL(request.getRequestURL().toString()), html, response);
 			//response.setContentLength(arg0);
 		}catch(Exception e){
 			logger.error("Error generating PDF", e);
@@ -62,7 +62,7 @@ public class PDFAGeneratorController {
 			@RequestParam("title") String title, 
 			HttpServletRequest request, HttpServletResponse response) {
 		try{
-			genPDF(new URL(request.getRequestURL().toString()), html, language, title, response);
+			genPDF(new URL(request.getRequestURL().toString()), html, response);
 			//response.setContentLength(arg0);
 		}catch(Exception e){
 			logger.error("Error generating PDF", e);
@@ -70,20 +70,20 @@ public class PDFAGeneratorController {
 		return response;
 	}
 	
-	protected void genPDF(URL sourceUrl, String language, String title, HttpServletResponse response) throws IOException, UtilException{
+	protected void genPDF(URL sourceUrl, HttpServletResponse response) throws IOException, PdfUAGenerationException{
 		if(sourceUrl != null && !"".equals(sourceUrl)){
 			OutputStream out = response.getOutputStream();
-			HTMLToPDFConverter.htmlToPDF(sourceUrl, out, language, title);
+			HTMLToPDFConverter.htmlToPDF(sourceUrl, out);
 			response.setContentType("application/pdf");
 			response.addHeader("Content-Disposition", "attachment; filename=pdfaGenerated.pdf");
 			response.addHeader("Accept-ranges", "none");
 		}
 	}
 	
-	protected void genPDF(URL requestUrl, String html, String language, String title, HttpServletResponse response) throws IOException, UtilException{
+	protected void genPDF(URL requestUrl, String html, HttpServletResponse response) throws IOException, PdfUAGenerationException{
 		if(!"".equals(html)){
 			OutputStream out = response.getOutputStream();
-			HTMLToPDFConverter.htmlToPDF(requestUrl, html, out, language, title);
+			HTMLToPDFConverter.htmlToPDF(requestUrl, html, out);
 			response.setContentType("application/pdf");
 			response.addHeader("Content-Disposition", "attachment; filename=pdfaGenerated.pdf");
 			response.addHeader("Accept-ranges", "none");

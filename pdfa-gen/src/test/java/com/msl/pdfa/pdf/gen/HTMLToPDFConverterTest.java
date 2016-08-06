@@ -42,11 +42,11 @@ public class HTMLToPDFConverterTest {
 			// File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 
-			HTMLToPDFConverter.htmlToPDF(url, outPDF);
-			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
-			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
-			Assert.assertNotNull("Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion",
-					outPDF);
+			int size = HTMLToPDFConverter.htmlToPDF(url, outPDF);
+			System.out.println("PdfUA Generation:: path:" + fileOut.getPath() + ", tamaño:" + size);
+			logger.debug(("PdfUA Generation:: path:" + fileOut.getPath()) + ", tamaño:" + size);
+			Assert.assertNotNull("PdfUA Generation:: not null assertion", outPDF);
+			Assert.assertTrue("PdfUA Generation:: size bigger than 0 assertion", size > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

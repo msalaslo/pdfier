@@ -6,14 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.msl.pdfa.pdf.commons.Constants;
-import com.msl.pdfa.pdf.exception.UtilException;
+import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
 import com.msl.pdfa.pdf.http.HTTPClient;
 
 public class HTMLTidier {
 	
 	protected static final Logger logger = LoggerFactory.getLogger(HTMLTidier.class);
 
-	public static String getHTMLTidied(URL sourceUrl) throws UtilException {
+	public static String getHTMLTidied(URL sourceUrl) throws PdfUAGenerationException {
 		try {
 			String htmlTidied = "";
 			try {
@@ -28,11 +28,11 @@ public class HTMLTidier {
 			return htmlTidied;
 		} catch (Exception e) {
 			logger.error("Error tidying HTML", e);
-			throw new UtilException("Error tidying HTML", e);
+			throw new PdfUAGenerationException("Error tidying HTML", e);
 		}
 	}
 	
-	public static String getHTMLTidied(URL requestUrl, String inputHTML) throws UtilException {
+	public static String getHTMLTidied(URL requestUrl, String inputHTML) throws PdfUAGenerationException {
 		try {
 			String htmlTidied = HTMLSanitiser.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
@@ -41,11 +41,11 @@ public class HTMLTidier {
 			return htmlTidied;
 		} catch (Exception e) {
 			logger.error("Error tidying HTML", e);
-			throw new UtilException("Error tidying HTML", e);
+			throw new PdfUAGenerationException("Error tidying HTML", e);
 		}
 	}
 
-	public static String getHTMLTidied(String inputHTML) throws UtilException {
+	public static String getHTMLTidied(String inputHTML) throws PdfUAGenerationException {
 		try {
 			String htmlTidied = HTMLSanitiser.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
@@ -54,7 +54,7 @@ public class HTMLTidier {
 			return htmlTidied;
 		} catch (Exception e) {
 			logger.error("Error tidying HTML", e);
-			throw new UtilException("Error tidying HTML", e);
+			throw new PdfUAGenerationException("Error tidying HTML", e);
 		}
 	}
 

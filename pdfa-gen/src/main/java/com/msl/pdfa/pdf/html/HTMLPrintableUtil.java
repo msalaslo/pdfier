@@ -19,7 +19,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.msl.pdfa.pdf.exception.UtilException;
+import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
 import com.msl.pdfa.pdf.io.IOUtils;
 
 import net.htmlparser.jericho.Attribute;
@@ -36,35 +36,35 @@ public class HTMLPrintableUtil {
 
 	protected static final Logger logger = LoggerFactory.getLogger(HTMLPrintableUtil.class);
 
-	public static String addMandatoryHtml(InputStream html) throws UtilException {
+	public static String addMandatoryHtml(InputStream html) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(html);
 			return addMandatoryHtml(source);
 		} catch (IOException e) {
 			logger.error("Error reading HTML to parse", e);
-			throw new UtilException("Error reading HTML to parse", e);
+			throw new PdfUAGenerationException("Error reading HTML to parse", e);
 		}
 	}
 
-	public static String addMandatoryHtml(String html) throws UtilException {
+	public static String addMandatoryHtml(String html) throws PdfUAGenerationException {
 		Source source = new Source(html);
 		return addMandatoryHtml(source);
 	}
 	
-	public static String replaceNbsp(String html) throws UtilException {
+	public static String replaceNbsp(String html) throws PdfUAGenerationException {
 		return html.replace("&nbsp;", " ");
 	}
 	
-	public static String removeBlanksBetweenTags(String html) throws UtilException {
+	public static String removeBlanksBetweenTags(String html) throws PdfUAGenerationException {
 		return html.replace("> <", "><");
 	}
 
-	public static String getMainContent(String html, String mainContentAttribute) throws UtilException {
+	public static String getMainContent(String html, String mainContentAttribute) throws PdfUAGenerationException {
 		Source source = new Source(html);
 		return getMainContent(source, mainContentAttribute);
 	}
 
-	private static String getMainContent(Source source, String mainContentAttribute) throws UtilException {
+	private static String getMainContent(Source source, String mainContentAttribute) throws PdfUAGenerationException {
 		try {
 			Element htmlElement = source.getFirstElement(HTMLElementName.HTML);
 			Element bodyElement = source.getFirstElement(HTMLElementName.BODY);
@@ -90,11 +90,11 @@ public class HTMLPrintableUtil {
 			return outputDocument.toString();
 		} catch (Exception e) {
 			logger.error("Error generating HTML printable", e);
-			throw new UtilException("Error generating HTML printable", e);
+			throw new PdfUAGenerationException("Error generating HTML printable", e);
 		}
 	}
 
-	public static String moveStyleToHead(String inputHTML) throws UtilException {
+	public static String moveStyleToHead(String inputHTML) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(inputHTML);
 			Element bodyElement = source.getFirstElement(HTMLElementName.BODY);
@@ -121,11 +121,11 @@ public class HTMLPrintableUtil {
 			return source.toString();
 		} catch (Exception e) {
 			logger.error("Error generating HTML printable", e);
-			throw new UtilException("Error generating HTML printable", e);
+			throw new PdfUAGenerationException("Error generating HTML printable", e);
 		}
 	}
 	
-	public static String addCDATAToHeadStyleTags(String inputHTML) throws UtilException {
+	public static String addCDATAToHeadStyleTags(String inputHTML) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(inputHTML);
 			Element headElement = source.getFirstElement(HTMLElementName.HEAD);
@@ -149,11 +149,11 @@ public class HTMLPrintableUtil {
 			return source.toString();
 		} catch (Exception e) {
 			logger.error("Error generating HTML printable", e);
-			throw new UtilException("Error generating HTML printable", e);
+			throw new PdfUAGenerationException("Error generating HTML printable", e);
 		}
 	}
 
-	private static String addMandatoryHtml(Source source) throws UtilException {
+	private static String addMandatoryHtml(Source source) throws PdfUAGenerationException {
 		try {
 			Element htmlElement = source.getFirstElement(HTMLElementName.HTML);
 			if (htmlElement != null) {
@@ -172,11 +172,11 @@ public class HTMLPrintableUtil {
 			}
 		} catch (Exception e) {
 			logger.error("Error generating HTML printable", e);
-			throw new UtilException("Error generating HTML printable", e);
+			throw new PdfUAGenerationException("Error generating HTML printable", e);
 		}
 	}
 
-	public static String addLogoFragment(String inputHTML, String attr, String logoFragmentFile) throws UtilException {
+	public static String addLogoFragment(String inputHTML, String attr, String logoFragmentFile) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(inputHTML);
 			OutputDocument outputDocument = new OutputDocument(source);
@@ -197,11 +197,11 @@ public class HTMLPrintableUtil {
 			return outputDocument.toString();
 		} catch (Exception e) {
 			logger.error("Error adding logo fragment", e);
-			throw new UtilException("Error adding logo fragment", e);
+			throw new PdfUAGenerationException("Error adding logo fragment", e);
 		}
 	}
 
-	public static String removeElementByAttr(String inputHTML, String attr, String attrValue) throws UtilException {
+	public static String removeElementByAttr(String inputHTML, String attr, String attrValue) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(inputHTML);
 			OutputDocument outputDocument = new OutputDocument(source);
@@ -212,7 +212,7 @@ public class HTMLPrintableUtil {
 			return outputDocument.toString();
 		} catch (Exception e) {
 			logger.error("Error removing element by attr value, attr" + attr + ",attrValue:" + attrValue, e);
-			throw new UtilException("Error removing element by attr value, attr" + attr + ",attrValue:" + attrValue, e);
+			throw new PdfUAGenerationException("Error removing element by attr value, attr" + attr + ",attrValue:" + attrValue, e);
 		}
 	}
 
@@ -321,14 +321,14 @@ public class HTMLPrintableUtil {
 		return ret;
 	}
 	
-	public static String compactSource(String inputHTML) throws UtilException {
+	public static String compactSource(String inputHTML) throws PdfUAGenerationException {
 		try {
 			Source source = new Source(inputHTML);
 			SourceCompactor sourceCompactor = new SourceCompactor(source);
 			return sourceCompactor.toString();
 		} catch (Exception e) {
 			logger.error("Error compacting HTML", e);
-			throw new UtilException("Error compacting HTML", e);
+			throw new PdfUAGenerationException("Error compacting HTML", e);
 		}
 	}
 

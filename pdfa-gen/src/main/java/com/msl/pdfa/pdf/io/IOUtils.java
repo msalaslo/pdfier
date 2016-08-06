@@ -14,13 +14,13 @@ import java.io.OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.msl.pdfa.pdf.exception.UtilException;
+import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
 
 public class IOUtils {
 	
 	private static Logger logger = LoggerFactory.getLogger(IOUtils.class);
 
-	public static File stringToFile(String content, File file) throws UtilException{		
+	public static File stringToFile(String content, File file) throws PdfUAGenerationException{		
 		try {
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
@@ -32,12 +32,12 @@ public class IOUtils {
 			bw.close();
 		} catch (IOException e) {
 			logger.error("Error parsing file.", e);
-			throw new UtilException("Error parsing file.", e);
+			throw new PdfUAGenerationException("Error parsing file.", e);
 		}		
 		return file;
 	}
 	
-	public static File inputStreamToFile(InputStream is, File file) throws UtilException{
+	public static File inputStreamToFile(InputStream is, File file) throws PdfUAGenerationException{
 		OutputStream outputStream = null;
 		try {			
 			// write the inputStream to a FileOutputStream
@@ -51,7 +51,7 @@ public class IOUtils {
 			}		
 		} catch (IOException e) {
 			logger.error("Error piping inputstream to outputstream.", e);
-			throw new UtilException("Error piping inputstream to outputstream.", e);
+			throw new PdfUAGenerationException("Error piping inputstream to outputstream.", e);
 		} finally {
 			if (is != null) {
 				try {
@@ -99,5 +99,15 @@ public class IOUtils {
 		// convert String into InputStream
 		InputStream is = new ByteArrayInputStream(inString.getBytes());
 		return is;
+	}
+	
+	public static void silentlyCloseOutputStream(OutputStream out){
+		if(out != null){
+			try {
+				out.close();
+			} catch (IOException e) {
+				// Nothing to do
+			}
+		}
 	}
 }
