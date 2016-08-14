@@ -1,61 +1,629 @@
-<html class="">
-  <head>
-    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}
-    </style>
-    <title>Hello AngularJS
-    </title>
-    <link href="css/angular-bootstrap.css" rel="stylesheet">
-    <style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { 	display: none !important; } 
-    </style>
-    <style type="text/css">.fancybox-margin{margin-right:0px;}
-    </style>
-  </head>
-  <body ng-app="hello" class="ng-scope">	
-    <div ng-controller="navigation as nav" class="container ng-scope">		
-      <ul class="nav nav-pills" role="tablist">			
-        <li class="active">
-          <a href="#/">home</a>
-        </li>			
-        <li>
-        <a href="#/login">login</a>
-        </li>			
-        <li ng-show="authenticated" class="">
-          <a href="" ng-click="nav.logout()">logout</a>
-        </li>			
-        <li ng-show="authenticated" class="">
-          <a href="#/pdfa">PDFA</a>
-        </li>		
-      </ul>	
-    </div>	
-    <!-- ngView:  -->
-    <div ng-view="" class="container ng-scope">
-      <h1 class="ng-scope">Greeting</h1>
-      <div ng-show="authenticated" class="ng-scope">    
-        <p class="ng-binding">The ID is a40d4831-39bc-4a17-85e1-b2b8b750c0f0
-        </p>    
-        <p class="ng-binding">The content is Hello World from app
-        </p> 
-        <div ng-controller="pdfa" class="ng-scope">    
-          <p>URL: 
-            <input type="text" name="url" value="www.google.com" ng-model="url" class="ng-pristine ng-untouched ng-valid">
-          </p>    
-          <button ng-click="downloadPdf()">Submit
-          </button>    
-          <hr>    
-          <object ng-show="content" data="" type="application/pdf" style="width: 100%; height: 400px;" class="ng-hide">
-          </object>     
-        </div>
-      </div>
-      <div ng-show="!authenticated" class="ng-scope ng-hide">    
-        <p>Login to see your greeting
-        </p>
-      </div>
-    </div>	
-<script src="js/angular-bootstrap.js" type="text/javascript"></script>	
-<script src="js/hello.js"></script>
-    <div style="display: none;">
-    </div>
-    <style> .humane, .humane-libnotify { position: fixed; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; transition: all 0.3s ease-out; z-index: 100000; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); } .humane, .humane-libnotify { font-family: Ubuntu, Arial, sans-serif; text-align: center; font-size: 15px; top: 10px; right: 10px; opacity: 0; width: 150px; color: #fff; padding: 10px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABQCAYAAADYxx/bAAAABmJLR0QA/wD/AP+gvaeTAAAANElEQVQYlWNgYGB4ysTAwMDAxMjICCUQXDQWAwMDAxMTExMedcRyB6d5CAMQ5hGrjSrmAQBQdgIXlosSTwAAAABJRU5ErkJggg=='); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0.9)), color-stop(1, rgba(50,50,50,0.9))) no-repeat; background: -moz-linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.9) 100%) no-repeat; background: -webkit-linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.9) 100%) no-repeat; background: -ms-linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.9) 100%) no-repeat; background: -o-linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.9) 100%) no-repeat; background: linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.9) 100%) no-repeat; *background-color: #000; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 4px 4px -4px #000; box-shadow: 0 4px 4px -4px #000; -moz-transform: translateY(-40px); -webkit-transform: translateY(-40px); -ms-transform: translateY(-40px); -o-transform: translateY(-40px); transform: translateY(-40px); } .humane p, .humane-libnotify p, .humane ul, .humane-libnotify ul { margin: 0; padding: 0; } .humane ul, .humane-libnotify ul { list-style: none; } .humane.humane-libnotify-info, .humane-libnotify.humane-libnotify-info { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABQCAYAAADYxx/bAAAABmJLR0QA/wD/AP+gvaeTAAAAMUlEQVQYlWNgYDB6ysTAwMDAxMDACCcYUFkMDEwMDEwMBNVhkxg65jGhmke6M6hgHgBSdgHnpZwADwAAAABJRU5ErkJggg=='); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,50,0.9)), color-stop(1, rgba(0,0,100,0.9))) no-repeat; background: -moz-linear-gradient(top, rgba(0,0,50,0.9) 0%, rgba(0,0,100,0.9) 100%) no-repeat; background: -webkit-linear-gradient(top, rgba(0,0,50,0.9) 0%, rgba(0,0,100,0.9) 100%) no-repeat; background: -ms-linear-gradient(top, rgba(0,0,50,0.9) 0%, rgba(0,0,100,0.9) 100%) no-repeat; background: -o-linear-gradient(top, rgba(0,0,50,0.9) 0%, rgba(0,0,100,0.9) 100%) no-repeat; background: linear-gradient(top, rgba(0,0,50,0.9) 0%, rgba(0,0,100,0.9) 100%) no-repeat; *background-color: #030; } .humane.humane-libnotify-success, .humane-libnotify.humane-libnotify-success { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABQCAYAAADYxx/bAAAABmJLR0QA/wD/AP+gvaeTAAAAMUlEQVQYlWNgMGJ4ysTAwMDAxMAIJxhQWQwMDEwMTKgS2NRhkxg65jGhmke6M6hhHgBS2QHn2LzhygAAAABJRU5ErkJggg=='); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,50,0,0.9)), color-stop(1, rgba(0,100,0,0.9))) no-repeat; background: -moz-linear-gradient(top, rgba(0,50,0,0.9) 0%, rgba(0,100,0,0.9) 100%) no-repeat; background: -webkit-linear-gradient(top, rgba(0,50,0,0.9) 0%, rgba(0,100,0,0.9) 100%) no-repeat; background: -ms-linear-gradient(top, rgba(0,50,0,0.9) 0%, rgba(0,100,0,0.9) 100%) no-repeat; background: -o-linear-gradient(top, rgba(0,50,0,0.9) 0%, rgba(0,100,0,0.9) 100%) no-repeat; background: linear-gradient(top, rgba(0,50,0,0.9) 0%, rgba(0,100,0,0.9) 100%) no-repeat; *background-color: #030; } .humane.humane-libnotify-error, .humane-libnotify.humane-libnotify-error { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAABmJLR0QA/wD/AP+gvaeTAAAAPklEQVQokWMwYmB4ysTAwMCATjASFsOmBBvBRJ7x+O0g0wCS7CDTH/RwH7X9MVDuwyaG032D2M2UeIYO7gMAqt8C19Bn7+YAAAAASUVORK5CYII='); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(50,0,0,0.9)), color-stop(1, rgba(100,0,0,0.9))) no-repeat; background: -moz-linear-gradient(top, rgba(50,0,0,0.9) 0%, rgba(100,0,0,0.9) 100%) no-repeat; background: -webkit-linear-gradient(top, rgba(50,0,0,0.9) 0%, rgba(100,0,0,0.9) 100%) no-repeat; background: -ms-linear-gradient(top, rgba(50,0,0,0.9) 0%, rgba(100,0,0,0.9) 100%) no-repeat; background: -o-linear-gradient(top, rgba(50,0,0,0.9) 0%, rgba(100,0,0,0.9) 100%) no-repeat; background: linear-gradient(top, rgba(50,0,0,0.9) 0%, rgba(100,0,0,0.9) 100%) no-repeat; *background-color: #300; } .humane.humane-animate, .humane-libnotify.humane-libnotify-animate { opacity: 1; -moz-transform: translateY(0); -webkit-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); transform: translateY(0); } .humane.humane-animate:hover, .humane-libnotify.humane-libnotify-animate:hover { opacity: 0.2; } .humane.humane-animate, .humane-libnotify.humane-libnotify-js-animate { opacity: 1; -moz-transform: translateY(0); -webkit-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); transform: translateY(0); } .humane.humane-animate:hover, .humane-libnotify.humane-libnotify-js-animate:hover { opacity: 0.2; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20); } .gi-assertion-select * { cursor: crosshair !important; } .gi-assertion-select *:hover { outline: 1px dotted rgba(0, 0, 0, 1); } .gi-assertion-selected { outline: 3px solid rgba(0, 170, 0, 1) !important; } 
-    </style>
-  </body>
-</html>
+<div class="container-group" id="main-content" role="main" tabindex="-1"> <div id="column-1"> <div class="portlet-dropzone portlet-column-content portlet-column-content-only" id="layout-column_column-1"> <div class="portlet-boundary portlet-boundary_1_WAR_privacyportlet_ portlet-static portlet-static-start portlet-borderless smc-privacy-portlet " id="p_p_id_1_WAR_privacyportlet_"> <span id="p_1_WAR_privacyportlet"></span> </div> <div class="portlet-boundary portlet-boundary_confirmationportlet_WAR_saaairwaysportlet_ portlet-static portlet-static-end portlet-borderless " id="p_p_id_confirmationportlet_WAR_saaairwaysportlet_"> <span id="p_confirmationportlet_WAR_saaairwaysportlet"></span> <div class="portlet-borderless-container" style=""> <div class="portlet-body"> <div class="container-group"> <div class="page__title"> <div class="row-group"> <div class="col-xs-12 col-sm-7"> <h2 class="page__title_text">Confirmation</h2> </div> <div class="col-xs-12 col-sm-5"> <div class="page__utils_wrapper"> <ul class="page__utils"> <li> <div id="divFormSubmitConfirmationPDF" style="display: none"> <form id="hiddenConfirmationPDFForm" action="https://uat.flysaa.com/plan-book/book/confirmation?p_p_id=confirmationportlet_WAR_saaairwaysportlet&amp;p_p_lifecycle=2&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_resource_id=resourceUrlId&amp;p_p_cacheability=cacheLevelPage&amp;p_p_col_id=column-1&amp;p_p_col_pos=1&amp;p_p_col_count=2&amp;_confirmationportlet_WAR_saaairwaysportlet_reportType=pdf" method="post" target="_blank"> <input type="hidden" name="confirmationPageHTML" id="confirmationPageHTML">
+										</form>
+									</div> 
+									<a class="page__utils_link flysaaicon-pdf js-pdf" href="#">
+										Download pdf
+									</a>
+								</li>
+								<li>
+									<a class="page__utils_link flysaaicon-print js-print" href="#">
+										Print
+									</a>
+								</li>							
+							
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-group">
+		<div class="col-xs-12 col-sm-6">
+			<div class="confirmation-code-container">
+				<h3 class="confirmation-code-label">Confirmation code</h3>
+				<span class="confirmation-code center">YK74DR</span>
+			</div>
+			<div class="confirmation-email-container">
+				<span class="confirmation-email-label">This confirmation will be sent to the email address:</span>
+				<span class="confirmation-email center">aaa@bb.com</span>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+			<div class="confirmation-total-container">
+				<h3 class="confirmation-total">Total</h3>
+				<div class="confirmation-total-price">
+					<div class="confirmation-list-row">
+						<span class="pull-left text-bold">Payment method</span> 
+						<span class="pull-right">Bank transfer</span>
+					</div>
+					<span class="confirmation-total-pay text-right">EUR 741.04</span>
+				</div>
+				<div class="confirmation-total-detailed">
+					<div class="confirmation-list-row">
+						<span class="pull-left text-bold">Total air transportation charges: </span>
+						<span class="pull-right">EUR 620.92</span>
+					</div>
+					<div class="confirmation-list-row">
+						<span class="pull-left text-bold">Taxes, fees and charges</span> 
+						<span class="pull-right">EUR 120.12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="itinerary-wrapper simple">
+		<ul class="row-group">
+			
+				<li class="col-xs-12 col-sm-6">
+					
+					<ul class="itinerary-list">
+						
+							
+							
+							
+							
+							<li>
+								<div class="itinerary-header">
+						<h3 class="itinerary-title flysaaicon-flight-outbound">
+							Outbound flight 
+							<span class="itinerary-date flysaaicon-calendar">
+															
+								(Monday, 5/16/16)
+								
+							</span>
+						</h3>
+					</div><div class="itinerary-item">
+									<span class="itinerary-number"><span class="text-bold"><span class="sr-only">Flight number</span>SA260</span><span class="sr-only">Operated by </span>
+										South African Airways (SA)</span><div class="itinerary-flight pull-left">
+										<span class="itinerary-text slider"><span class="text-bold"> Johannesburg</span>JNB</span>
+										<span class="itinerary-text">
+											<span class="sr-only">Departure Time</span>
+											<span class="text-bold">19:15</span>
+											
+										</span>
+									</div>
+									
+									<div class="itinerary-flight pull-right">
+										<span class="itinerary-text slider">
+											<span class="text-bold"> Frankfurt</span>FRA
+										</span>
+										<span class="itinerary-text"> 
+											<span class="sr-only">Departure Time</span>
+											<span class="text-bold">06:10</span>
+											
+												17 May 2016
+											
+										</span>
+									</div>
+								</div>
+							</li>
+						
+					</ul>
+				</li>
+			
+			
+				<li class="col-xs-12 col-sm-6">
+					<div class="itinerary-header">
+						<h3 class="itinerary-title flysaaicon-flight-inbound">
+							Inbound flight 
+							<span class="itinerary-date flysaaicon-calendar">
+								(Wednesday, 6/22/16)
+								
+							</span>
+						</h3>
+					</div>
+					<ul class="itinerary-list">
+						
+							
+							
+							
+							
+							<li>
+								<div class="itinerary-item">
+									<div class="itinerary-flight pull-left">
+										<span class="itinerary-text slider">
+											<span class="text-bold"> Frankfurt</span>FRA
+										</span>
+										<span class="itinerary-text">
+											<span class="sr-only">Departure Time</span>
+											<span class="text-bold">
+												20:45
+											</span>
+											
+										</span>
+									</div>
+									<span class="itinerary-number">
+										<span class="text-bold"><span class="sr-only">Flight number</span>SA261</span> <span class="sr-only">Operated by </span>South African Airways (SA)
+									</span>
+									<div class="itinerary-flight pull-right">
+										<span class="itinerary-text slider">
+											<span class="text-bold"> Johannesburg</span>JNB
+										</span>
+										<span class="itinerary-text"> 
+											<span class="sr-only">Departure Time</span>
+											<span class="text-bold">
+												07:25
+											</span>
+											
+												23 Jun 2016
+											
+										</span>
+									</div>
+								</div>
+							</li>
+						
+					</ul>
+				</li>
+			
+		</ul>
+	</div>
+<div><div><div><div><div><div><ul class="accordion-list accordion-list-type2 accordion-list-active" role="tablist">		<li class="template-item active">			<div class="template-header">				<h3>											Traveller's Details						<span class="sr-only js-controlTitle" data-expanded="mybookings.expanded" data-collapsed="mybookings.collapsed">mybookings.expanded</span>									</h3>			</div>			<div id="panel1" class="template-body" role="tabpanel" aria-hidden="false" aria-labelledby="tab1">				<div class="travellers-details-container">					<h4 class="travellers-details-title">1						Travellers					</h4>					<ul class="travellers-details-list list-inline">													<li>1 adult/s </li>																													</ul>				</div>				<div class="table-responsive">					<table class="table travellers-details-table">						<thead>							<tr>								<th>Name</th>							</tr>						</thead>													<tbody>																<tr>									<td><span class="paxName">Aaaa Bbbb</span>										 											(Adult)																			</td>								</tr>							</tbody>											</table>				</div>			</div>		</li>			</ul></div></div></div></div></div></div>	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	<div class="portlet-boundary portlet-boundary_101_  portlet-static portlet-static-end portlet-borderless portlet-asset-publisher " id="p_p_id_101_INSTANCE_GET_BENEFITS_SIMPLE_">
+		<span id="p_101_INSTANCE_GET_BENEFITS_SIMPLE"></span>
+
+
+
+	
+	
+	
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
+		
+
+		
+			
+			
+
+				
+
+				<div class="portlet-borderless-container" style="">
+					
+
+					
+
+
+	<div class="portlet-body">
+
+
+
+	
+		
+			
+			
+				
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+				
+
+				
+					
+					
+						
+
+
+	
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="subscribe-action">
+	
+
+	
+</div>
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+	
+		
+
+
+
+		
+			
+				
+                                    																																															            
+    <div class="visit hidden-print">
+		<div class="page__title">
+			<h3 class="page__title_text">Get our benefits there</h3>
+		</div>
+		<ul class="row-group equal-height">
+    	    		    			    				<li class="col-xs-12 col-sm-4">
+    				    <div class="promo promo-imagetext">
+    				        
+<a href="/plan-book/complete-your-experience/car-rental" class="promo-link">
+	<div class="image-wrapper">
+	    <img class="promo-image" src="/image/journal/article?img_id=13995707&amp;t=1461672809637" alt="People driving a car"> </div> <div class="promo-info "> <span class="promo-text eq-h" style="height: 59px;"><strong>FEEL THE FREEDOM</strong> of driving at your destination</span> </div> </a> </div> </li> <li class="col-xs-12 col-sm-4"> <div class="promo promo-imagetext"> <a href="/plan-book/complete-your-experience/hotels" class="promo-link"> <div class="image-wrapper"> <img class="promo-image" src="/image/journal/article?img_id=13995251&amp;t=1461672564271" alt="Deck chairs and pool with a view"> </div> <div class="promo-info "> <span class="promo-text eq-h" style="height: 59px;"><strong>THE BEST HOTEL</strong> offers are waiting for you</span> </div> </a> </div> </li> <li class="col-xs-12 col-sm-4"> <div class="promo promo-imagetext"> <a href="/plan-book/add-to-your-experience/insurance" class="promo-link"> <div class="image-wrapper"> <img class="promo-image" src="/image/journal/article?img_id=12498663&amp;t=1459950955237" alt="Hot air balloons flying"> </div> <div class="promo-info "> <span class="promo-text eq-h" style="height: 59px;"><strong>BUY YOUR</strong> insurance before flying</span> </div> </a> </div> </li> </ul> </div> </div> </div> </div> <div class="button-group text-center"> <a href="https://uat.flysaa.com/index" class="button button1">Finish</a> </div> </div> </div> </div> </div> </div> </div> </div>
