@@ -262,11 +262,31 @@ public class HTMLPrintableUtil {
 			if (typeAttribute != null)
 				sb.append(' ').append(typeAttribute);
 			sb.append(">\n").append(styleSheetContent).append("\n</style>");
-			outputDocument.replace(startTag, sb.toString());
+			String finalStyleSheet = relativeToAbsoluteUrls(sourceUrl, href, sb.toString());
+			outputDocument.replace(startTag, finalStyleSheet);
 		}
 		logger.debug("Here is the document " + sourceUrl
 				+ " with all external stylesheets converted to inline stylesheets:\n");
 		return outputDocument.toString();
+	}
+	
+	protected static String relativeToAbsoluteUrls(URL sourceUrl, String href, String styleSheetContent) throws Exception {
+		String content = styleSheetContent;
+		if(styleSheetContent!= null && (styleSheetContent.contains("url(../") || styleSheetContent.contains("url(\"../"))){
+			if(href.startsWith("/")){
+				String rootPath = sourceUrl.getProtocol() + "://" + sourceUrl.getHost();
+				if(sourceUrl.getPort() > 0){
+					rootPath += ":" + sourceUrl.getPort();
+				}
+				String[] paths = href.split("/");
+				String absoluteUrl = rootPath + "/" + paths[1] + "/";
+				content = styleSheetContent.replace("url(\"../",  "url(\"" + absoluteUrl);
+				content = content.replace("url(../",  "url(" + absoluteUrl);
+//				File file = new File("D:\\ECLIPSE_WORKSPACES\\PDFA\\pdf-project\\pdfa-gen\\replaced.css");
+//				IOUtils.stringToFile(content, file);
+			}
+		}
+		return content;
 	}
 	
 	public static String parseImages(URL sourceUrl, String inputHTML) throws Exception {

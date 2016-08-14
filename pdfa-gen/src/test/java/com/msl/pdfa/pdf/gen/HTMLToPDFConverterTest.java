@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,13 +36,13 @@ public class HTMLToPDFConverterTest {
 			// URL("http://www.autocontrol.es/reclamaciones_online.aspx");
 			// File fileOut = new File(TestUtil.getTestPath() +
 			// "autocontrol.pdf");
-			 URL url = new URL("http://webaim.org/training/");
-			 File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
+//			 URL url = new URL("http://webaim.org/training/");
+//			 File fileOut = new File(TestUtil.getTestPath() + "webaim.pdf");
 //			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");
 //			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
-			// URL url = new
-			// URL("http://www.freedomscientific.com/Downloads/JAWS");
-			// File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
+			 URL url = new
+			 URL("http://www.freedomscientific.com/Downloads/JAWS");
+			 File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 
 			int size = HTMLToPDFConverter.htmlToPDF(url, outPDF);
@@ -51,6 +54,27 @@ public class HTMLToPDFConverterTest {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testAll() {
+		Set<File> keys = null;
+		try {
+			Map<File, URL> testWebs = new HashMap<>();
+			testWebs.put(new File(TestUtil.getTestPath() + "webaim.pdf"), new URL("http://webaim.org/training/"));
+			testWebs.put(new File(TestUtil.getTestPath() + "wikipedia.pdf"), new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada"));
+			testWebs.put(new File(TestUtil.getTestPath() + "JAWS.pdf"), new URL("http://www.freedomscientific.com/Downloads/JAWS"));
+			keys = testWebs.keySet();
+			for (File file : keys) {
+				int size = HTMLToPDFConverter.htmlToPDF(testWebs.get(file), new FileOutputStream(file));
+				System.out.println("PdfUA Generation:: path:" + file.getPath() + ", tamaño:" + size);
+				logger.debug(("PdfUA Generation:: path:" + file.getPath()) + ", tamaño:" + size);
+				Assert.assertTrue("PdfUA Generation:: size bigger than 0 assertion", size > 0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		} 
 	}
 
 	@Test
