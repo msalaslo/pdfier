@@ -33,7 +33,7 @@ angular.module('hello', [ 'ngRoute'  ])
 	      });	
 	      var config = {
 	              headers : {
-	                  'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+	                  'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 	              },
 	          	responseType :'arraybuffer'
 	         }

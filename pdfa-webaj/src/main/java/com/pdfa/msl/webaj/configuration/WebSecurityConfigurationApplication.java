@@ -36,7 +36,7 @@ public class WebSecurityConfigurationApplication {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.httpBasic()
-			.and().authorizeRequests().antMatchers("/", "/index").permitAll().anyRequest().authenticated()
+			.and().authorizeRequests().antMatchers("/", "/index", "/pdfafromurl").permitAll().anyRequest().authenticated()
 			.and().formLogin().loginPage("/login").permitAll()
             .and().logout().permitAll()
 			.and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);

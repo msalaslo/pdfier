@@ -21,7 +21,7 @@
     <mvc:default-servlet-handler/>
 
 
-	<bean
+	<!-- bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
@@ -29,7 +29,7 @@
 		<property name="suffix" value=".html" />
 		<property name="order" value="2" />
 		<property name="viewNames" value="*html" />
-	</bean>
+	</bean-->
 
 
 </beans>

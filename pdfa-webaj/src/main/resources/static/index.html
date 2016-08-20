@@ -16,6 +16,8 @@
 
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
+    
+    <link href="css/pdfier.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -242,9 +244,16 @@ If your documents are inaccessible on the web, you’re losing business and cred
                 <div class="col-md-8">
                     <p>You can test PDF online generation:</p>
                 </div>
-                <div class="col-md-4">
+                <div ng-controller="pdfa">
+				    <p>URL: <input type="text" name="url" value="www.google.com" ng-model="url"/></p>
+				    <button ng-click="downloadPdf()">Submit</button>
+				    <hr />
+				    <object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
+				    
+				</div>
+                <!-- div class="col-md-4">
                     <a class="btn btn-lg btn-default btn-block" href="index-pdfa.html">Go to PDF accessible generation</a>
-                </div>
+                </div-->
             </div>
         </div>
 
