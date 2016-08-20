@@ -1,0 +1,18 @@
+        <!-- Call to Action Section -->
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>You can test PDF online generation:</p>
+                </div>
+                <div ng-controller="pdfa">
+				    <p>URL: <input type="text" name="url" value="www.google.com" ng-model="url"/></p>
+				    <button ng-click="downloadPdf()">Submit</button>
+				    <hr />
+				    <object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
+				    
+				</div>
+                <!-- div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block" href="index-pdfa.html">Go to PDF accessible generation</a>
+                </div-->
+            </div>
+        </div>
