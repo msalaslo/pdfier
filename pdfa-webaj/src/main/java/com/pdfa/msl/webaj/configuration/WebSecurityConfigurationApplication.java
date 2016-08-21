@@ -39,8 +39,9 @@ public class WebSecurityConfigurationApplication {
 //			.and().authorizeRequests().antMatchers("/", "/index", "/pdfafromurl").permitAll().anyRequest().authenticated()
 //			.and().formLogin().loginPage("/login").permitAll()
 //            .and().logout().permitAll()
-			.and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
-			http.csrf().csrfTokenRepository(csrfTokenRepository());
+//			.and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+//			http.csrf().csrfTokenRepository(csrfTokenRepository())
+			;
 		}
 	}
 

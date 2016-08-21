@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pdfa.msl</groupId>
-	<artifactId>pdfa-webaj</artifactId>
+	<artifactId>pdfier-portal-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>pdfa-webaj</name>
-	<description>PDFA webajfor Spring Boot</description>
+	<name>PDF-UA Web Portal</name>
+	<description>PDF-UA Web Portal</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -31,12 +31,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -58,15 +58,20 @@
 	</dependencies>
 
 	<build>
+		<finalName>pdfier-portal-web</finalName>
+		<!-- Mantengo esto para poder probar en local, hasta que configure un apache -->
 		<resources>
 			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${project.build.directory}/generated-resources</directory>
+				<directory>${project.basedir}/src/main/webapp</directory>
 			</resource>
 		</resources>
 		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>static/**</packagingExcludes>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -108,8 +113,8 @@
 				</executions>
 				<configuration>
 					<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-					<cssDestinationFolder>${project.build.directory}/generated-resources/static/css</cssDestinationFolder>
-					<jsDestinationFolder>${project.build.directory}/generated-resources/static/js</jsDestinationFolder>
+					<cssDestinationFolder>${basedir}/src/main/webapp/static/css</cssDestinationFolder>
+					<jsDestinationFolder>${basedir}/src/main/webapp/static/js</jsDestinationFolder>
 					<wroFile>${project.build.directory}/wro/wro.xml</wroFile>
 					<extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
 					<contextFolder>${basedir}/src/main/wro</contextFolder>

@@ -1,3 +1,5 @@
+angular.module('app', ['ngMessages']);
+
 angular.module('hello', [ 'ngRoute'  ])
   .config(function($routeProvider, $httpProvider) {
 
@@ -22,6 +24,7 @@ angular.module('hello', [ 'ngRoute'  ])
   })
   
   .controller('pdfa', function($http, $scope, $sce){
+	  $scope.url = "https://es.wikipedia.org/wiki/Wikipedia:Portada"
 	  $scope.downloadPdf = function () {
 	      var data = $.param({
 		     //html: document.documentElement.outerHTML
@@ -33,7 +36,7 @@ angular.module('hello', [ 'ngRoute'  ])
 	              },
 	          	responseType :'arraybuffer'
 	         }
-		  $http.post('/pdf-ua/pdfafromurl',data, config)
+		  $http.post('/pdfier-portal-web/pdfafromurl',data, config)
 		  .success(function (response) {
 		       var file = new Blob([response], {type: 'application/pdf'});
 		       var fileURL = URL.createObjectURL(file);
