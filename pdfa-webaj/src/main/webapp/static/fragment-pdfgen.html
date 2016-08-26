@@ -14,6 +14,7 @@
 					<div ng-message="required">Please enter a value for this field.</div>
 				</div>
 				<button ng-click="downloadPdf()">Convert to PDF-UA</button>
+				<a href="/pdfier-portal-web/pdfafromurl?url={{url}}">Download PDF</a>
 				<hr />
 				<object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
 			</form>

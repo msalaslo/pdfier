@@ -1,6 +1,8 @@
 package com.pdfa.msl.webaj.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.Date;
 
@@ -10,74 +12,74 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
 import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
 
-@RestController
+@Controller
 public class PDFAGeneratorController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping(value = "/pdfafromurl", method = RequestMethod.POST, produces = "application/pdf")
-	@ResponseBody
-	public HttpServletResponse pdfaFromUrl(@RequestParam("url") String url, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/pdfafromurl", produces = "application/pdf")
+	public void pdfaFromUrl(@RequestParam("url") String url, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("antes");
 		try {
 			if (url != null) {
-				generateAndWritePDF(new URL(url), response);
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				int size = generateAndWritePDF(new URL(url), out);			
+				configureResponse(response, size);
+				out.writeTo(response.getOutputStream());
+				response.getOutputStream().flush();
 			} else {
 				logger.warn("url param can not be null");
 			}
 		} catch (Exception e) {
 			logger.error("Error generating PDF", e);
 		}
-		return response;
-	}
-
-	@RequestMapping(value = "/pdfa", method = RequestMethod.POST, produces = "application/pdf")
-	@ResponseBody
-	public HttpServletResponse pdfaHtml(@RequestParam("url") String url, HttpServletRequest request, HttpServletResponse response) {
-		try {
-			generateAndWritePDF(new URL(url), response);
-		} catch (Exception e) {
-			logger.error("Error generating PDF /pdfa", e);
-		}
-		return response;
 	}
 
 	@RequestMapping(value = "/pdfafull", method = RequestMethod.POST, produces = "application/pdf")
 	@ResponseBody
 	public HttpServletResponse pdfaHtmlWithParams(@RequestParam("html") String html, @RequestParam("language") String language, @RequestParam("title") String title, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			generateAndWritePDF(new URL(request.getRequestURL().toString()), html, response);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			int size = generateAndWritePDF(new URL(request.getRequestURL().toString()), html, out);			
+			configureResponse(response, size);
+			out.writeTo(response.getOutputStream());
+			response.getOutputStream().flush();
 		} catch (Exception e) {
 			logger.error("Error generating PDF /pdfafull", e);
 		}
 		return response;
 	}
 
-	private void generateAndWritePDF(URL sourceUrl, HttpServletResponse response) throws IOException, PdfUAGenerationException {
+	private int generateAndWritePDF(URL sourceUrl, OutputStream out) throws IOException, PdfUAGenerationException {
 		if (sourceUrl != null && !"".equals(sourceUrl)) {
-			int size = HTMLToPDFConverter.htmlToPDF(sourceUrl, response.getOutputStream());
-			configureResponse(response, size);
+			System.out.println("hola");
+			return HTMLToPDFConverter.htmlToPDF(sourceUrl, out);
+		}else{
+			return 0;
 		}
 	}
 
-	private void generateAndWritePDF(URL requestUrl, String html, HttpServletResponse response) throws IOException, PdfUAGenerationException {
+	private int generateAndWritePDF(URL requestUrl, String html, OutputStream out) throws IOException, PdfUAGenerationException {
 		if (!"".equals(html)) {
-			int size = HTMLToPDFConverter.htmlToPDF(requestUrl, html, response.getOutputStream());
-			configureResponse(response, size);
+			return HTMLToPDFConverter.htmlToPDF(requestUrl, html, out);
+		}else{
+			return 0;
 		}
 	}
 
-	private void configureResponse(HttpServletResponse response, int contentLenght) {
-		response.setContentType("application/pdf");
+	private void configureResponse(HttpServletResponse response, int contentLenght) throws IOException {
+ 		response.setContentType("application/pdf");
+//		response.addHeader("Content-Type","application/force-download");
 		response.addHeader("Content-Disposition", "attachment; filename=pdfaGenerated.pdf");
 		response.addHeader("Accept-ranges", "none");
 		response.setContentLength(contentLenght);

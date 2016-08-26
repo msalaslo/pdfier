@@ -24,7 +24,7 @@ import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverter {
 
-	private static boolean createDebugFiles = true;
+	private static boolean createDebugFiles = false;
 	
 	private static boolean sanitizePdf = false;
 	
@@ -124,13 +124,12 @@ public class HTMLToPDFConverter {
 				renderer.createPDF(baos, language);
 			}
 			size = baos.size();
-			outPDF.write(baos.toByteArray());
+			baos.writeTo(outPDF);
 			return size;
 		} catch (Exception e) {
 			logger.error("Error generating PDF from html", e);
 			throw new PdfUAGenerationException("Error generating PDF from html", e);
 		} finally{
-			IOUtils.silentlyCloseOutputStream(outPDF);
 			IOUtils.silentlyCloseOutputStream(baos);
 			IOUtils.silentlyCloseOutputStream(auxBaos);
 		}
