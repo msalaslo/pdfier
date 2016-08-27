@@ -8,7 +8,7 @@
 		<div ng-controller="pdfa">
 			<form name="pdf-gen-form">
 				<label> Type the URL that you want convert in an accessible	PDF (http://...): 
-				<input type="text" name="url" value="www.google.com" ng-model="url" required />
+				<input type="text" name="url" value="www.google.com" ng-model="url" size="80" required />
 				</label>
 				<div ng-messages="pdf-gen-form.url.$error" role="alert">
 					<div ng-message="required">Please enter a value for this field.</div>
