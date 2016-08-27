@@ -80,7 +80,7 @@ public class PDFAGeneratorController {
 	private void configureResponse(HttpServletResponse response, int contentLenght) throws IOException {
  		response.setContentType("application/pdf");
 //		response.addHeader("Content-Type","application/force-download");
-		response.addHeader("Content-Disposition", "attachment; filename=pdfaGenerated.pdf");
+		response.addHeader("Content-Disposition", "attachment; filename=PDFier.pdf");
 		response.addHeader("Accept-ranges", "none");
 		response.setContentLength(contentLenght);
 	}

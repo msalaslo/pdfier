@@ -2,22 +2,33 @@
 <!-- Call to Action Section -->
 <div class="well">
 	<div class="row">
-		<div class="col-md-8">
-			<p>You can test PDF-UA online generation:</p>
-		</div>
 		<div ng-controller="pdfa">
-			<form name="pdf-gen-form">
-				<label> Type the URL that you want convert in an accessible	PDF (http://...): 
-				<input type="text" name="url" value="www.google.com" ng-model="url" size="80" required />
-				</label>
-				<div ng-messages="pdf-gen-form.url.$error" role="alert">
-					<div ng-message="required">Please enter a value for this field.</div>
+			<div class="container searchbar">
+				<div class="row">
+					<div class="col-md-10 col-md-push-1 col-sm-8 col-sm-push-2 text-center">						
+						<form class="form-horizontal">
+							<div class="row">
+								<div class="input-group">
+									<input class="form-control input-transparent" name="url"
+										value="http://www.randomwebsite.com" type="url" ng-model="url">
+									<!-- span class="input-group-btn"><a class="btn btn-danger" data-toggle="collapse" data-content="#advanced"
+										href="#advanced">Options</a-->
+									<span class="input-group-btn">
+										<a class="btn btn-success" href="/pdfier-web-mvc/pdfafromurl?url={{url}}">Save as PDF</a>
+										<button ng-click="downloadPdf()" class="btn btn-success">View as PDF</button>
+									</span>
+								</div>
+							</div>
+							<div class="sbinfo">
+								Convert an accessible web page to PDF/UA - just enter the URL and <b>Download
+						as tagged PDF</b>!
+							</div>
+							<hr />
+							<object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
+						</form>
+					</div>
 				</div>
-				<button ng-click="downloadPdf()">Convert to PDF-UA</button>
-				<a href="/pdfier-web-mvc/pdfafromurl?url={{url}}">Download PDF</a>
-				<hr />
-				<object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
-			</form>
+			</div>
 		</div>
 		<!-- div class="col-md-4">
                     <a class="btn btn-lg btn-default btn-block" href="index-pdfa.html">Go to PDF accessible generation</a>
