@@ -2,7 +2,19 @@
 <!-- Call to Action Section -->
 <div class="well">
 	<div class="row">
-		<div ng-controller="pdfa">
+		<div ng-controller="pdfa as $ctrl">
+		    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <center><h3 class="modal-title" id="modal-title">Thank you for using PDFier service!</h3></center>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <center><strong>Generating accessible PDF<strong></center>
+        </div>
+        <div class="modal-footer">
+            <center><button class="btn btn-success" type="button" ng-click="$ctrl.ok()">OK</button></center>
+        </div>
+    </script>
+    
 			<div class="container searchbar">
 				<div class="row">
 					<div class="col-md-10 col-md-push-1 col-sm-8 col-sm-push-2 text-center">						
@@ -14,8 +26,8 @@
 									<!-- span class="input-group-btn"><a class="btn btn-danger" data-toggle="collapse" data-content="#advanced"
 										href="#advanced">Options</a-->
 									<span class="input-group-btn">
-										<a class="btn btn-success" href="/pdfier-web-mvc/pdfafromurl?url={{url}}">Save as PDF</a>
-										<button ng-click="downloadPdf()" class="btn btn-success">View as PDF</button>
+										<a ng-click="$ctrl.open()" class="btn btn-success" href="/pdfier-web-mvc/pdfafromurl?url={{url}}">Save as PDF</a>
+										<button ng-click="$ctrl.open();downloadPdf();" class="btn btn-success hidden-phone">View as PDF</button>
 									</span>
 								</div>
 							</div>

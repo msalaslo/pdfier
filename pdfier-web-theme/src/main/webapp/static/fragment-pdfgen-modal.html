@@ -1,0 +1,16 @@
+<div ng-controller="pdfa-modal as $ctrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Thank you for using our service!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            Generating accessible PDF
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
+</div>
