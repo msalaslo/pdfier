@@ -1,5 +1,5 @@
 <!-- Header Carousel -->
-    <header id="myCarousel" class="carousel slide">
+    <header id="myCarousel" class="carousel slide" ng-controller="navController">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -37,11 +37,3 @@
             <span class="icon-next"></span>
         </a>
     </header>
-    
-    <!-- Script to Activate the Carousel -->
-	<script>
-		$('.carousel').carousel({
-			interval : 5000
-		//changes the speed
-		})
-	</script>

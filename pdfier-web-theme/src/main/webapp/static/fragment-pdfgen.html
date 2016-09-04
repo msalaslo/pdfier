@@ -2,7 +2,7 @@
 <!-- Call to Action Section -->
 <div class="well">
 	<div class="row">
-		<div ng-controller="pdfa as $ctrl">
+		<div ng-controller="pdfController as $ctrl">
 		    <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <center><h3 class="modal-title" id="modal-title">Thank you for using PDFier service!</h3></center>
@@ -36,7 +36,7 @@
 						as tagged PDF</b>!
 							</div>
 							<hr />
-							<object ng-show="content" data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
+							<object ng-if="content"  data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
 						</form>
 					</div>
 				</div>
