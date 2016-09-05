@@ -1,5 +1,5 @@
 angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'  ])
-  .config(function($routeProvider, $httpProvider) {
+  .config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider.when('/', {
         templateUrl : 'home.html',
         controller : 'navController'
@@ -13,15 +13,13 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
          templateUrl : 'pricing.html',
          controller : 'navController'
       }).otherwise('/');
-    
+    $locationProvider.html5Mode(true); //activate HTML5 Mode
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
   })
  
   
 .controller('navController', function($scope, $location){
   $scope.isHome = ($location.path() == '/');
-  console.log('isHome:' + $scope.isHome);
-  console.log('location:' + $location.path());
 })
 
 .controller('pdfController', function($http, $scope, $sce, $uibModal, $location){
