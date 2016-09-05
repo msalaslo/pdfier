@@ -1,0 +1,24 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+	<url>
+		<loc>http://www.pdfier.com/</loc>
+		<lastmod>2016-09-05T15:03:36+00:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://www.pdfier.com/services</loc>
+		<lastmod>2016-09-05T15:03:36+00:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://www.pdfier.com/contact</loc>
+		<lastmod>2016-09-05T15:03:36+00:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://www.pdfier.com/pricing</loc>
+		<lastmod>2016-09-05T15:03:36+00:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+</urlset>
