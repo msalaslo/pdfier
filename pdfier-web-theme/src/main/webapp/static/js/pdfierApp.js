@@ -32,7 +32,7 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
   
 
 .controller('navController', function($scope, $location){
-  $scope.isHome = ($location.path() == '/');
+	$scope.isHome = ($location.path() == '/');
 })
 
 .controller('pdfController', ['$http', '$scope', '$sce', '$uibModal', '$location', 'appConfig', function($http, $scope, $sce, $uibModal, $location, appConfig){
