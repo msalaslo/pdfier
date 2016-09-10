@@ -1,0 +1,70 @@
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Save As PDF/UA Link
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#/">Home</a>
+                    </li>
+                    <li class="active">Save As PDF/UA Link</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+	<div class="row">
+		<div class="col-md-9">
+			<p>With a <a href="/pricing">service license</a> you can put a link on your website that lets vistors save your web pages as PDF with a single click. It literally takes only two minutes for you to implement and offers great flexibility and power! All you need to do is put the following link on your web pages.</p>
+			<div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><pre data-original-code="<a href=&quot;http://pdfier.com/saveaspdfua&quot;>Save this page as PDF</a>" data-snippet-id="ext.faf5ee0ebeb053b6c2ea3f506860e98e" data-snippet-saved="false" data-codota-status="done">&lt;a href="http://pdfier.com/saveaspdfua"&gt;Save this page as PDF&lt;/a&gt;</pre>
+			<p>You can also let your visitors download other pages of your website easily by using the <i>url</i> parameter.</p>
+			<div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><div class="top-box hide"><div class="alert-info"></div></div><pre data-original-code="<a href=&quot;http://pdfier.com/saveaspdfua?url=http://pdfmyurl.com/faq&quot;>Download the FAQ page as PDF</a>" data-snippet-id="ext.ece71fa40a20577cfd1bdf489b402531" data-snippet-saved="false" data-codota-status="done">&lt;a href="http://pdfier.com/saveaspdfua?url=http://pdfmyurl.com/faq"&gt;Download the FAQ page as PDF&lt;/a&gt;</pre>
+			<p>You can control the layout of the PDF by adding parameters to the URL from the following table.</p>
+			<table class="table table-bordered table-striped table-condensed">
+				<thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+				<tbody>
+				<tr><td>url</td><td>The page on your website, which you want to convert. If you don't specify this, then we convert the page that the link is on.<br>Note that you must <a href="http://www.w3schools.com/tags/ref_urlencode.asp">encode the URL</a> to make sure it's used correctly. <a href="http://meyerweb.com/eric/tools/dencoder/">This site</a> can help you do so.</td></tr>
+				<tr><td>page_size</td><td>PDF page format such as A3, A4 etc. You can find a full list of allowed values <a href="/page-sizes-and-page-breaking">here</a></td></tr>
+				<tr><td>orientation</td><td>PDF page orientation, either <i>portrait</i> or <i>landscape</i></td></tr>
+				<tr><td>width</td><td>Width of the PDF, in case you don't specify a standard page size</td></tr>
+				<tr><td>height</td><td>Height of the PDF, in case you don't specify a standard page size.<br>If you specify a width, but no height, then we convert your page to one long <b>single page PDF</b>!</td></tr>
+				<tr><td>top</td><td>Top margin in <i>unit</i></td></tr>
+				<tr><td>bottom</td><td>Bottom margin in <i>unit</i></td></tr>
+				<tr><td>left</td><td>Left margin in <i>unit</i></td></tr>
+				<tr><td>margin</td><td>Margin margin in <i>unit</i></td></tr>
+				<tr><td>unit</td><td>Unit for page sizing and margins, can be <i>mm</i>, <i>in</i> or <i>pt</i>. Default is mm</td></tr>
+				<tr><td>header</td><td>Header with markup, page number etc, see the <a href="/headers-and-footers">header and footer documentation</a> for more information</td></tr>
+				<tr><td>footer</td><td>Footer with markup, page number etc, see the <a href="/headers-and-footers">header and footer documentation</a> for more information</td></tr>
+				<tr><td>content</td><td>Controls which content of the page you want to convert or exclude. See <a href="/part-of-page-conversion">part of page conversion</a> for more info.</td></tr>
+				<tr><td>css_media_type</td><td>Set to <i>print</i> if you want to use the print friendly version of your web page</td></tr>
+				<tr><td>filename</td><td>Set the filename for the PDF</td></tr>
+				<tr><td>title</td><td>Set the title for the PDF (this overwrites the default title retrieved from the HTML title page)</td></tr>
+				<tr><td>inline</td><td>Display the PDF inline in the browser instead of as popup to save</td></tr>
+				</tbody>
+			</table>
+			<h2>Examples</h2>
+			<p>Below are some example links that you could put on your web pages. You can see what they do by clicking on them.</p>
+			<p><a href="/saveaspdf">Save this webpage as PDF!</a></p>
+			<p><a href="/saveaspdf?url=http%3A%2F%2Fpdfmyurl.com%2Ffaq">Download the FAQ as PDF!</a></p>
+			<p><a href="/saveaspdf?page_size=A4&amp;footer=&lt;p%20align=right&gt;%page&lt;/p&gt;">Download as A4 PDF with right aligned page number!</a>
+			</p><p><a href="/saveaspdf?inline&amp;top=0&amp;bottom=0&amp;right=0&amp;left=0">Show as inline PDF and without margins!</a>
+			</p><h2>Important usage instructions</h2>
+			<p>If you acquired a service license and you want to use this functionality, then you need to be aware of the following things:</p>
+			<ol>
+			<li><a name="REFERER"></a>When your visitors click the above link, We use the <i>HTTP_REFERER</i> parameter to determine where they came from.<br> If you're using HTTPs on your website then you should link to our secure website (i.e. https://pdfier.com/saveaspdfua), otherwise the HTTP_REFERER doesn't get passed and we can NOT convert the webpage. Some browsers (most notably Internet Explorer) also do NOT pass the <i>HTTP_REFERER</i> when you use <em>window.open</em> or <em>target=_blank</em> on your save as PDF links.</li>
+			<li><a name="activate-your-domain"></a>After you <a href="/pricing">acquire the service license</a>, you need to set the domain(s) of your website(s) in our members area. This allows us to tie your subscription to the web pages that are being converted.</li> 
+			</ol>
+		</div>
+		<div class="col-md-3">
+			<div class="pricing-plan promoted">
+						<h3 class="pricing-title">Get a License!</h3>
+						<hr>
+						<ul class="pricing-details">	    			
+							<li>Accessible PDFs (PDF/UA)</li>
+							<li>Many conversion options</li>
+							<li>No installation required!</li>
+							<li>Up and running in minutes!</li>
+						</ul>
+					<a href="/pricing" target="_top" class="btn btn-danger btn-lg">Sign Up!</a>
+			 </div> <!-- /.pricing -->
+		</div>
+	</div>

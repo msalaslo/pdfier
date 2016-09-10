@@ -26,14 +26,13 @@
 									<!-- span class="input-group-btn"><a class="btn btn-danger" data-toggle="collapse" data-content="#advanced"
 										href="#advanced">Options</a-->
 									<span class="input-group-btn">
-										<a ng-click="$ctrl.open()" class="btn btn-success" href="/pdfier-web-mvc/pdfafromurl?url={{url}}">Save as PDF</a>
-										<button ng-click="$ctrl.open();downloadPdf();" class="btn btn-success hidden-phone">View as PDF</button>
+										<button ng-click="$ctrl.open();downloadPdf();" class="btn btn-success">Save as PDF/UA</button>
+										<button ng-click="$ctrl.open();viewPdf();" class="btn btn-success">View as PDF/UA</button>
 									</span>
 								</div>
 							</div>
 							<div class="sbinfo">
-								Convert an accessible web page to PDF/UA - just enter the URL and <b>Download
-						as tagged PDF</b>!
+								Convert an accessible web page to PDF/UA - just enter the URL and <b>Save (or View in this window) as tagged PDF (PDF/UA)</b>!
 							</div>
 							<hr />
 							<object ng-if="content"  data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
