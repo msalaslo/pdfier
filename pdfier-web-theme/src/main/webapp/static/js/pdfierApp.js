@@ -38,6 +38,7 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
 .controller('pdfController', ['$http', '$scope', '$sce', '$uibModal', '$location', 'appConfig', function($http, $scope, $sce, $uibModal, $location, appConfig){
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
+  var showProcessingBar = false;
   var modalInstance = null;
   $ctrl.open = function (size) {
 	    modalInstance = $uibModal.open({

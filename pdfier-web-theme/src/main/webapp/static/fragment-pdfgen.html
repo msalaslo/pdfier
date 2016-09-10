@@ -4,15 +4,15 @@
 	<div class="row">
 		<div ng-controller="pdfController as $ctrl">
 		    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <center><h3 class="modal-title" id="modal-title">Thank you for using PDFier service!</h3></center>
-        </div>
-        <div class="modal-body" id="modal-body">
-            <center><strong>Generating accessible PDF<strong></center>
-        </div>
-        <div class="modal-footer">
-            <center><button class="btn btn-success" type="button" ng-click="$ctrl.ok()">OK</button></center>
-        </div>
+        		<div class="modal-header">
+            		<center><h3 class="modal-title" id="modal-title">Thank you for using PDFier service!</h3></center>
+        		</div>
+        		<div class="modal-body" id="modal-body">
+            		<center><strong>Generating accessible PDF<strong><img src="/images/processing.gif" width="25" height="25"></center>
+        		</div>
+        		<div class="modal-footer">
+            		<center><button class="btn btn-success" type="button" ng-click="$ctrl.ok()">OK</button></center>
+        		</div>
     </script>
     
 			<div class="container searchbar">
