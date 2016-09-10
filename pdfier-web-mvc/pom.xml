@@ -54,6 +54,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>pdfier-web-mvc</finalName>
+		<finalName>pdfier-app</finalName>
 	</build>
 </project>

@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>pdfier-app</context-root>
+</jboss-web>

@@ -1,5 +1,10 @@
 angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'  ])
-  .config(function($routeProvider, $locationProvider, $httpProvider, $compileProvider) {
+
+.constant('appConfig', {
+	appPdfServicePath: '/pdfier-app/saveaspdfua'
+})
+
+.config(function($routeProvider, $locationProvider, $httpProvider, $compileProvider) {
     $routeProvider.when('/', {
         templateUrl : 'home.html',
         controller : 'navController'
@@ -24,13 +29,13 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
     //security header
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
   })
- 
   
+
 .controller('navController', function($scope, $location){
   $scope.isHome = ($location.path() == '/');
 })
 
-.controller('pdfController', function($http, $scope, $sce, $uibModal, $location){
+.controller('pdfController', ['$http', '$scope', '$sce', '$uibModal', '$location', 'appConfig', function($http, $scope, $sce, $uibModal, $location, appConfig){
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
   var modalInstance = null;
@@ -58,7 +63,7 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
               },
           	responseType :'arraybuffer'
          }
-	  $http.post('/pdfier-web-mvc/pdfafromurl',data, config)
+	  $http.post(appConfig.appPdfServicePath, data, config)
 	  .success(function (response) {
 	       var file = new Blob([response], {type: 'application/pdf'});
 	       var fileURL = URL.createObjectURL(file);
@@ -78,7 +83,7 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
               },
           	responseType :'arraybuffer'
          }
-	  $http.post('/pdfier-web-mvc/pdfafromurl',data, config)
+	  $http.post(appConfig.appPdfServicePath, data, config)
 	  .success(function (response, status, headers, config) {
 	       var file = new Blob([response], {type: 'application/pdf'});
 	       var contentDispositionHeader = headers('Content-Disposition');
@@ -90,7 +95,7 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
 	       modalInstance.close();
 	});
   };
-})
+}])
   
 	// Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
