@@ -54,6 +54,11 @@ class ResourceLoaderUserAgent extends ITextUserAgent {
 					// InetSocketAddress("localhost", 3128));
 					// proxyUrl = new URL(uri);
 					// connection = proxyUrl.openConnection(proxy);
+					if(uri.contains("../")){
+						logger.info("uri contains ../: " + uri);
+						uri = uri.replace("../", "/");
+						logger.info("modified uri: " + uri);
+					}
 					connection = (HttpURLConnection) new URL(uri).openConnection();
 					connection.connect();
 					is = connection.getInputStream();
