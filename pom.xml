@@ -16,7 +16,7 @@
 		<maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
 		<junit.version>4.12</junit.version>
 		<slf4j.version>1.7.21</slf4j.version>
-		<spring.version>4.0.1.RELEASE</spring.version>
+		<spring.version>4.3.2.RELEASE</spring.version>
 		<maven.resources.plugin.version>3.5.3</maven.resources.plugin.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
 		<pdfa.version>1.0.0</pdfa.version>
