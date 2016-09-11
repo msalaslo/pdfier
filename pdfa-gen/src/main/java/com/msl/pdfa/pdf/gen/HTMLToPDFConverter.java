@@ -24,7 +24,7 @@ import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverter {
 
-	private static boolean createDebugFiles = true;
+	private static boolean createDebugFiles = false;
 	
 	private static boolean sanitizePdf = false;
 	

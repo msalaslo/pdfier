@@ -1,0 +1,172 @@
+<!-- Page Heading/Breadcrumbs -->
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">HTML To PDF/UA API</h1>
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li class="active">HTML To PDF/UA API</li>
+		</ol>
+	</div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+	<div class="col-md-9">
+		<p>PDFier offers a developers Application Programming Interface (API) for URL webpage or HTML to PDF/UA
+			conversion. It lets you create PDF/UA documents quickly, efficiently
+			and cost-effectively. Use it to create high-quality invoices,
+			reports, tickets, e-books, brochures and much more!</p>
+		<h2>Features</h2>
+		<ul>
+			<li>Supports full HTML, including HTML5, CSS2 and some features
+				of CSS3.</li>
+			<li>Ready to use <a href="/html-to-pdf-ua-api-examples">code
+					examples</a> for Java, .NET / C#, PHP, Perl, Ruby, Python and VB.net!
+			</li>
+			<li>No installation required, just invoke our online services</li>
+		</ul>
+
+		<h2 id="instructions_url">URL To PDF/UA Usage</h2>
+		<p>
+			The PDFier API is easy to use. It takes a license and either a URL or
+			raw HTML as input and returns the PDF/UA.<br>You just send a
+			request similar to this, which converts http://www.example.com to
+			PDF/UA:
+		</p>
+		<div class="top-box hide">
+			<div class="alert-info"></div>
+		</div>
+		<pre>http://pdfier.com/pdfier-app/urltopdfua?license=yourlicensekey&amp;url=http://www.example.com</pre>
+		<p>The request should at least have the following components:</p>
+		<ol>
+			<li><strong>endpoint</strong>: this should be <i>http://pdfier.com/pdfier-app/urltopdfua</i>
+				or <i>https://pdfier.com/pdfier-app/urltopdfua</i> for secure access</li>
+			<li><strong>license</strong>: this is mandatory and you will get
+				yours when you <a href="/pricing">sign up</a></li>
+			<li><strong>url</strong>: the web page that you want to convert
+				<i><strong>OR</strong></i></li>
+		</ol>
+		<p>Other than that you can use a lot of additional parameters in
+			the API call, which give you access to all the features for
+			conversion. These are all specified below.</p>
+		<p>
+			NB: You can use both GET as well as POST requests as long as you
+			properly <a
+				href="http://en.wikipedia.org/wiki/Query_string#URL_encoding" target="_blank">URL
+				encode</a> the data that you pass.
+		</p>
+
+		<h2 id="instructions_html">HTML To PDF/UA Usage</h2>
+		<p>
+			The PDFier API is easy to use. It takes a license and either a URL or
+			raw HTML as input and returns the PDF/UA.<br>You just send a
+			request similar to this, which converts http://www.example.com to
+			PDF/UA:
+		</p>
+		<div class="top-box hide">
+			<div class="alert-info"></div>
+		</div>
+		<pre>http://pdfier.com/pdfier-app/htmltopdfua?license=yourlicensekey&amp;html=%3Cdiv%20class%3D%27main-content%27...%3C%2Fdiv%3E</pre>
+		<p>The request should at least have the following components:</p>
+		<ol>
+			<li><strong>endpoint</strong>: this should be <i>http://pdfier.com/pdfier-app/htmltopdfua</i>
+				or <i>https://pdfier.com/pdfier-app/htmltopdfua</i> for secure
+				access</li>
+			<li><strong>license</strong>: this is mandatory and you will get
+				yours when you <a href="/pricing">sign up</a></li>
+			<li><strong>html</strong>: the raw HTML code that you want to
+				convert. HTML must be URL encoded. <a href="http://en.wikipedia.org/wiki/Query_string#URL_encoding" target="_blank">HTML
+				encode</a> the data that you pass.</li>
+			<li><strong>language</strong>: Set the language of the PDF/UA
+				instead of the value of the &lt;lang&gt; attibute from the web page.</li>
+			<li><strong>title</strong>: Set the title of the PDF/UA instead
+				of the value of the &lt;title&gt; tag from the web page.</li>
+		</ol>
+		<p>Other than that you can use a lot of additional parameters in
+			the API call, which give you access to all the features for
+			conversion. These are all specified below.</p>
+		<p>
+			NB: You should use POST requests, HTML could be too long for GET
+			request usage. For more information check <a
+				href="http://www.w3schools.com/tags/ref_httpmethods.asp"
+				target="_blank">GET method Restrictions on data length</a>
+		</p>
+
+		<p>
+		
+		
+		<strong>Conversion Parameters</strong>
+		</p>
+		<p>The table below shows the settings that you can change to
+			control the conversion process. These will largely determine the
+			contents of the resulting PDF/UA.</p>
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>Parameter</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>language</td>
+					<td>Set the language of the PDF/UA instead of the value of the
+						&lt;lang&gt; attibute from the web page. Mandatory when use HTML
+						to PDF/UA.</td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td>Set the title of the PDF/UA instead of the value of the
+						&lt;title&gt; tag from the web page. Mandatory when use HTML to
+						PDF/UA.</td>
+				</tr>
+				<tr>
+					<td>filename</td>
+					<td>Set the filename of the PDF/UA, which you see in the top
+						bar when you open the PDF/UA in Adobe Reader.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2 id="returncodes">Return codes</h2>
+		<p>Our API returns HTTP response codes, which you can check to see
+			if the conversion was succesfull or not. The following is the list of
+			return codes we use.</p>
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>200 OK</td>
+					<td>Your conversion was processed succesfully</td>
+				</tr>
+				<tr>
+					<td>400 Bad Request</td>
+					<td>Some request params are missing or bad specified</td>
+				</tr>
+				<tr>
+					<td>402 Payment required</td>
+					<td>You specified an invalid license key</td>
+				</tr>
+				<tr>
+					<td>429 Too Many Requests</td>
+					<td>You have overrun a <a href="/usage-restrictions">usage
+							limit</a> for your plan
+					</td>
+				</tr>
+				<tr>
+					<td>503 Service unavailable</td>
+					<td>You are sending multiple requests at the same time to the
+						API from the same IP address</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<ng-include src="'fragment-signup.html'"></ng-include>
+</div>

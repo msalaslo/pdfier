@@ -23,7 +23,14 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
       }).when('/save-as-pdf-ua', {
           templateUrl : 'save-as-pdf-ua.html',
           controller : 'navController'
-      }).otherwise('/');
+      }).when('/html-to-pdf-ua-api', {
+          templateUrl : 'html-to-pdf-ua-api.html',
+          controller : 'navController'
+      }).when('/html-to-pdf-ua-api-examples', {
+          templateUrl : 'html-to-pdf-ua-api-examples.html',
+          controller : 'navController'
+      })
+      .otherwise('/');
     //activate HTML5 Mode
     $locationProvider.html5Mode(true); 
     //security header

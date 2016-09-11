@@ -1,0 +1,277 @@
+<!-- Page Heading/Breadcrumbs -->
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">HTML To PDF/UA API Examples</h1>
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li class="active">HTML To PDF/UA API Examples</li>
+		</ol>
+	</div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+	<div class="col-md-9">
+		<p>We've made basic examples that show you how to use the PDFier
+			API in all major programming languages. These examples are
+			specifically intended to get you coding in a few minutes without the
+			need to install anything.</p>
+
+		<h2 id="instructions">Basic Example</h2>
+		<p>
+			PDFier API is very easy to use. It takes a license and either a URL
+			or raw HTML as input and returns a PDF.<br>You just send a
+			request similar to this, which we will be using in all our examples
+			and which converts http://www.sitetoconvert.com to PDF:
+		</p>
+		<div class="top-box hide">
+			<div class="alert-info"></div>
+		</div>
+		<pre>http://pdfier.com/pdfier-app/urltopdfua?license=yourlicensekey&amp;url=http://www.sitetoconvert.com</pre>
+		<p>
+			You can use a lot of additional parameters in the API call, which
+			give you access to all the features for conversion. These are all
+			specified in the <a href="/html-to-pdf-ua-api">documentation</a>.
+		</p>
+		<p>
+			NB: You can use both GET as well as POST requests as long as you
+			properly <a
+				href="http://en.wikipedia.org/wiki/Query_string#URL_encoding" target="_blank">URL
+				encode</a> the data that you pass.
+		</p>
+		<div class="panel-group" id="accordion" role="tablist"
+			aria-multiselectable="true">
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingOne">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion"
+							href="#c1" aria-expanded="true" aria-controls="c1"> Code
+							example for PHP </a>
+					</h4>
+				</div>
+				<div id="c1" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h1">
+					<div class="panel-body">
+						<p>
+							You can implement the PDFier API with the <em>file_get_contents</em>
+							function in PHP. Sending the example request and storing the PDF
+							in a local file thus becomes the following code.
+						</p>
+						<pre>$license = 'yourlicensekey';
+$url = urlencode('http://www.sitetoconvert.com');
+
+$result = file_get_contents("http://pdfier.com/pdfier-app/urltopdfua?license=$license&amp;url=$url");
+file_put_contents('/tmp/accessiblepdf.pdf',$result);
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h2">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c2" aria-expanded="false"
+							aria-controls="c2"> Code example for Java </a>
+					</h4>
+				</div>
+				<div id="c2" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h2">
+					<div class="panel-body">
+						<p>You can use the following code in Java to send the basic
+							example and get the PDF stored as 'accessiblepdf.pdf':</p>
+						<pre>String license = "yourlicensekey";
+String url = "http://www.sitetoconvert.com";
+File outs = new File("C:\\temp\accessiblepdf.pdf");
+
+URL u = new URL("http://pdfier.com/pdfier-app/urltopdfua?license=" + license + "&amp;url=" + url);
+URLConnection uc = u.openConnection();
+BufferedInputStream is = new BufferedInputStream(uc.getInputStream());
+BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(outs));
+
+byte[] b = new byte[8 * 1024];
+int read = 0;
+while ((read = is.read(b)) &gt; -1) {
+	bout.write(b, 0, read);
+}
+bout.flush();
+bout.close();
+is.close();
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h3">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c3" aria-expanded="false"
+							aria-controls="c3"> Code example for Ruby </a>
+					</h4>
+				</div>
+				<div id="c3" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h3">
+					<div class="panel-body">
+						<p>It is very easy to convert a URL to PDF in Ruby with the
+							PDFier API. Just get the result of our URL with the Ruby class
+							Net::HTTP.</p>
+						<pre>require 'net/http'
+license = 'yourlicensekey'
+url = 'http://www.sitetoconvert.com'
+
+uri = URI("http://pdfier.com/pdfier-app/urltopdfua?license=#{license}&amp;url=#{url}")
+Net::HTTP.start(uri.host, uri.port) do |http|
+  request = Net::HTTP::Get.new uri.request_uri
+
+  http.request request do |response|
+    open 'accessiblepdf.pdf', 'w' do |io|
+      response.read_body do |chunk|
+        io.write chunk
+      end
+    end
+  end
+end
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h4">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c4" aria-expanded="false"
+							aria-controls="c4"> Code example for .NET / C# </a>
+					</h4>
+				</div>
+				<div id="c4" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h4">
+					<div class="panel-body">
+						<p>
+							Converting a URL to PDF in C# is easy with the PDFier API. Just
+							use the C# WebClient method as in the example below.
+						</p>
+						<pre>string license = "yourlicensekey";
+string url = "http://www.sitetoconvert.com";
+
+using (var client = new WebClient())
+{
+    client.QueryString.Add("license", license);
+    client.QueryString.Add("url", url);
+    client.DownloadFile("http://pdfier.com/pdfier-app/urltopdfua", @"c:\temp\accessiblepdf.pdf");
+}
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h5">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c5" aria-expanded="false"
+							aria-controls="c5"> Code example for VB.net </a>
+					</h4>
+				</div>
+				<div id="c5" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h5">
+					<div class="panel-body">
+						<p>
+							It is easy to convert a URL into PDF in VB.net with our API. Just
+							use the VB.net WebClient.
+						</p>
+						<pre>Dim license As String = "yourlicensekey"
+Dim url As String = "http://www.sitetoconvert.com"
+
+Using client As New WebClient
+    client.QueryString.Add("license", license)
+    client.QueryString.Add("url", Url)
+    client.DownloadFile("http://pdfier.com/pdfier-app/urltopdfua", "c:\temp\accessiblepdf.pdf")
+End Using
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h6">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c6" aria-expanded="false"
+							aria-controls="c6"> Code example for Python </a>
+					</h4>
+				</div>
+				<div id="c6" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h6">
+					<div class="panel-body">
+						<p>You can use the Python function urllib2.urlopen to make use
+							of our API and convert URLs or HTML to PDF.</p>
+						<pre>import urllib2
+
+data = {
+   'license': 'yourlicensekey',
+   'url': 'http://www.sitetoconvert.com'
+}
+requesturl = 'http://pdfier.com/pdfier-app/urltopdfua?license={license}&amp;url={url}'.format(**data)
+result = urllib2.urlopen(requesturl)
+localFile = open('accessiblepdf.pdf', 'w')
+localFile.write(result.read())
+localFile.close()
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="h7">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#c7" aria-expanded="false"
+							aria-controls="c7"> Code example for Perl </a>
+					</h4>
+				</div>
+				<div id="c7" class="panel-collapse collapse" role="tabpanel"
+					aria-labelledby="h7">
+					<div class="panel-body">
+						<p>You can use several modules in Perl to use our API, such as
+							the File::Fetch or the LWP::Simple module.</p>
+						<pre>use File::Fetch;
+
+my $license = 'yourlicensekey';
+my $url = "http://www.sitetoconvert.com";
+
+my $ff = File::Fetch-&gt;new(uri =&gt; "http://pdfier.com/pdfier-app/urltopdfua?license=$license&amp;url=$url");
+my $where = $ff-&gt;fetch( to =&gt; '/tmp/accessiblepdf.pdf');
+</pre>
+						<p>
+							Of course you can use many options, by referring to the <a
+								href="/html-to-pdf-ua-api">documentation</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<ng-include src="'fragment-signup.html'"></ng-include>
+</div>

@@ -1,16 +1,16 @@
-        <!-- Page Heading/Breadcrumbs -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Save As PDF/UA Link
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#/">Home</a>
-                    </li>
-                    <li class="active">Save As PDF/UA Link</li>
-                </ol>
-            </div>
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Save As PDF/UA Link
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a>
+                </li>
+                <li class="active">Save As PDF/UA Link</li>
+            </ol>
         </div>
-        <!-- /.row -->
+    </div>
+    <!-- /.row -->
 
 	<div class="row">
 		<div class="col-md-9">
@@ -22,7 +22,7 @@
 			<table class="table table-bordered table-striped table-condensed">
 				<thead><tr><th>Parameter</th><th>Description</th></tr></thead>
 				<tbody>
-				<tr><td>url</td><td>The page on your website, which you want to convert. If you don't specify this, then we convert the page that the link is on.<br>Note that you must <a href="http://www.w3schools.com/tags/ref_urlencode.asp">encode the URL</a> to make sure it's used correctly. <a href="http://meyerweb.com/eric/tools/dencoder/">This site</a> can help you do so.</td></tr>
+				<tr><td>url</td><td>The page on your website, which you want to convert. If you don't specify this, then we convert the page that the link is on.<br>Note that you must <a href="http://www.w3schools.com/tags/ref_urlencode.asp" target="_blank">encode the URL</a> to make sure it's used correctly. <a href="http://meyerweb.com/eric/tools/dencoder/" target="_blank">This site</a> can help you do so.</td></tr>
 				<tr><td>filename</td><td>Set the filename for the PDF</td></tr>
 				<tr><td>title</td><td>Set the title for the PDF (this overwrites the default title retrieved from the HTML title page)</td></tr>
 				<tr><td>inline</td><td>Display the PDF inline in the browser instead of as popup to save</td></tr>
@@ -43,17 +43,6 @@
 			<li><a name="activate-your-domain"></a>After you <a href="/pricing">acquire the service license</a>, you need to set the domain(s) of your website(s) in our members area. This allows us to tie your subscription to the web pages that are being converted.</li> 
 			</ol>
 		</div>
-		<div class="col-md-3">
-			<div class="pricing-plan promoted">
-						<h3 class="pricing-title">Get a License!</h3>
-						<hr>
-						<ul class="pricing-details">	    			
-							<li>Accessible PDFs (PDF/UA)</li>
-							<li>Many conversion options</li>
-							<li>No installation required!</li>
-							<li>Up and running in minutes!</li>
-						</ul>
-					<a href="/pricing" class="btn btn-primary">Sign Up!</a>
-			 </div> <!-- /.pricing -->
-		</div>
+		
+		<ng-include src="'fragment-signup.html'"></ng-include>
 	</div>

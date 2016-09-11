@@ -79,7 +79,6 @@ public class HTMLPrintableUtilTest {
 		}
 	}
 	
-	@Test 
 	public void testReplaceNbsp() {
 		try{			
 			InputStream inputHtml = new FileInputStream("C:\\temp\\pdfa-test1468254158152.html");
