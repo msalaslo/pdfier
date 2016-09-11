@@ -2,7 +2,6 @@ package com.pdfier.web.filter;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -18,7 +17,7 @@ import com.pdfier.service.security.AccessControlService;
 /**
  * Servlet Filter implementation class DomainAccessControlFilter
  */
-public class DomainAccessControlFilter extends OncePerRequestFilter {
+public class LisenceAccessControlFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	AccessControlService accessControlService;
@@ -26,23 +25,22 @@ public class DomainAccessControlFilter extends OncePerRequestFilter {
     /**
      * Default constructor. 
      */
-    public DomainAccessControlFilter() {
+    public LisenceAccessControlFilter() {
     }
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+
 	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		String referrer = request.getHeader("referer");
-		if(referrer != null){
-			if(accessControlService.validReferrer(referrer)){
+		String lisence = request.getParameter("lisence");
+		if(lisence != null){
+			if(accessControlService.validLisence(lisence)){
 				// pass the request along the filter chain
 				chain.doFilter(request, response);
 			}else{
-				response.sendError(HttpServletResponse.SC_PAYMENT_REQUIRED, "No valid referrer. After you acquire the license, you need to set the domain(s) of your website(s) in our members area.");
+				response.sendError(HttpServletResponse.SC_PAYMENT_REQUIRED, "No valid lisence");
 			}
 		}else{
-			response.sendError(HttpServletResponse.SC_PAYMENT_REQUIRED, "No referrer found in the request. After you acquire the license, you need to set the domain(s) of your website(s) in our members area.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "lisence not found in the request");
 		}
+		
 	}
 }

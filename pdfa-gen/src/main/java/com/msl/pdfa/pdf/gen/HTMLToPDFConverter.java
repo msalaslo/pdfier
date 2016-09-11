@@ -24,7 +24,7 @@ import com.msl.pdfa.pdf.io.IOUtils;
 
 public class HTMLToPDFConverter {
 
-	private static boolean createDebugFiles = false;
+	private static boolean createDebugFiles = true;
 	
 	private static boolean sanitizePdf = false;
 	
@@ -59,7 +59,7 @@ public class HTMLToPDFConverter {
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.compactSource(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.removeBlanksBetweenTags(htmlTidied);
-			if(createDebugFiles){
+			if(true){
 				IOUtils.stringToFile(htmlTidied, new File("c:\\temp\\pdfa-test" + System.currentTimeMillis() + ".html"));
 			}
 			return generatePDFFromHTML(url, htmlTidied, outPDF, language);

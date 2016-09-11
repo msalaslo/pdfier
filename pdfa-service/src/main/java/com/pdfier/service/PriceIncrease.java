@@ -1,4 +1,4 @@
-package com.msl.pdfa.service;
+package com.pdfier.service;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

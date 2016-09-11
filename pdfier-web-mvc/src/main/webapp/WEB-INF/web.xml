@@ -25,16 +25,37 @@
 	
 	<filter>
 		<filter-name>DomainAccessControlFilter</filter-name>
-		<display-name>DomainAccessControlFilter</display-name>
-		<description>Domain Access Control Filter</description>
-		<filter-class>com.pdfier.web.filter.DomainAccessControlFilter</filter-class>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>DomainAccessControlFilterBean</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>LisenceAccessControlFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>LisenceAccessControlFilterBean</param-value>
+		</init-param>
 	</filter>
 	
 	<filter-mapping>
 		<filter-name>DomainAccessControlFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/saveaspdfua</url-pattern>
 	</filter-mapping>
 
+	<filter-mapping>
+		<filter-name>LisenceAccessControlFilter</filter-name>
+		<url-pattern>/pdfuafromurl</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>LisenceAccessControlFilter</filter-name>
+		<url-pattern>/pdfuafromhtml</url-pattern>
+	</filter-mapping>
+	
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
