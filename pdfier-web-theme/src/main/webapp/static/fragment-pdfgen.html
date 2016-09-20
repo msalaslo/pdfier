@@ -1,6 +1,6 @@
 
 <!-- Call to Action Section -->
-<div class="well">
+<div class="pdf-gen-bar well ">
 	<div class="row">
 		<div ng-controller="pdfController as $ctrl">
 		    <script type="text/ng-template" id="myModalContent.html">
@@ -34,7 +34,6 @@
 							<div class="sbinfo">
 								Convert an accessible web page to PDF/UA - just enter the URL and <b>Save (or View in this window) as tagged PDF (PDF/UA)</b>!
 							</div>
-							<hr />
 							<object ng-if="content"  data="{{PostDataResponse}}" type="application/pdf" class="pdf-container"></object>
 						</form>
 					</div>

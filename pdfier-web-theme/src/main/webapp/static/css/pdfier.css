@@ -16,5 +16,26 @@
   color: #fff;
 }
 
+.pdf-gen-bar {
+	background-color: #caddde;
+}
+
+.signup-centered {
+    text-align: center;
+    font-size: 0;
+}
+.signup-centered > div {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 13px;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 
