@@ -1,4 +1,4 @@
-angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'  ])
+angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 
 .constant('appConfig', {
 	appPdfServicePath: '/pdfier-app/saveaspdfua'
@@ -28,6 +28,12 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
           controller : 'navController'
       }).when('/html-to-pdf-ua-api-examples', {
           templateUrl : 'html-to-pdf-ua-api-examples.html',
+          controller : 'navController'
+	  }).when('/search', {
+          templateUrl : 'search.html',
+          controller : 'navController'
+    }).when('/amp', {
+          templateUrl : 'amp/index.html',
           controller : 'navController'
       })
       .otherwise('/');
@@ -116,4 +122,42 @@ angular.module('pdfierApp', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstra
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+  
+})
+  
+    .controller('ssController', function($http, $scope, $timeout){
+		var promise;
+		var vm = this;
+		vm.hotels = [];
+		$scope.SearchResults = function (searchText) {
+			if(promise) $timeout.cancel(promise);
+			promise = $timeout(function(){
+				// do service call
+				//alert(searchText);
+				 var config = {
+				 headers : {
+					'Authorization': 'Bearer 67153d44-10db-30db-af79-93d13cb151d7',
+					'Content-Type': 'application/json;charset=utf-8'
+				 }
+				}
+				var baseUrl = 'https://des.gotui.com/api-back/v1.0/masterData/hotels/de/PMI';
+				var searchFilter = "search=" + searchText;
+				var url = baseUrl + '?' + searchFilter;
+				$http.get(url, config).
+					then(function successCallback(response){
+						if(response.data){
+							var destinationHotels = angular.fromJson(response.data);
+							if(destinationHotels.destination.hotels){
+								vm.hotels = destinationHotels.destination.hotels;
+							}
+						}
+					}, 
+					function errorCallback(response){
+					});				
+			}, 200);
+		}
+  })
+  ;
+  
+
+
