@@ -117,7 +117,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>pdfier-app</finalName>
+		<finalName>pdfier</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -134,12 +134,8 @@
 		</plugins>
 	</build>
 	<modules>
-		
-		<module>pdfa-gen</module>
-		
-		
-		
-		<module>pdfier-theme</module>
-    
-  </modules>
+		<module>pdfier-gen</module>
+		<module>pdfier-app</module>
+		<module>pdfier-front</module>
+	</modules>
 </project>
