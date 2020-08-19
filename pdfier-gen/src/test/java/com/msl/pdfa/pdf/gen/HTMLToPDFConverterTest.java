@@ -24,7 +24,7 @@ public class HTMLToPDFConverterTest {
 
 	@Before
 	public void setUp() {
-		System.getProperties().setProperty("xr.util-logging.loggingEnabled", "true");
+		System.getProperties().setProperty("xr.util-logging.loggingEnabled", "false");
 		XRLog.setLoggingEnabled(true);
 	}
 
@@ -41,8 +41,8 @@ public class HTMLToPDFConverterTest {
 //			URL url = new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada");
 //			File fileOut = new File(TestUtil.getTestPath() + "wikipedia.pdf");
 			 URL url = new
-			 URL("http://www.freedomscientific.com/Downloads/JAWS");
-			 File fileOut = new File(TestUtil.getTestPath() + "JAWS.pdf");
+			 URL("https://donate.wikimedia.org/w/index.php?title=Special:LandingPage&country=ES&uselang=es&utm_medium=sidebar&utm_source=donate&utm_campaign=C13_es.wikipedia.org");
+			 File fileOut = new File(TestUtil.getTestPath() + "wiki-donaciones.pdf");
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 
 			int size = HTMLToPDFConverter.htmlToPDF(url, outPDF);
@@ -61,9 +61,9 @@ public class HTMLToPDFConverterTest {
 		Set<File> keys = null;
 		try {
 			Map<File, URL> testWebs = new HashMap<>();
-			testWebs.put(new File(TestUtil.getTestPath() + "webaim.pdf"), new URL("http://webaim.org/training/"));
+			testWebs.put(new File(TestUtil.getTestPath() + "webaim.pdf"), new URL("https://webaim.org/training/"));
 			testWebs.put(new File(TestUtil.getTestPath() + "wikipedia.pdf"), new URL("https://es.wikipedia.org/wiki/Wikipedia:Portada"));
-			testWebs.put(new File(TestUtil.getTestPath() + "JAWS.pdf"), new URL("http://www.freedomscientific.com/Downloads/JAWS"));
+//			testWebs.put(new File(TestUtil.getTestPath() + "JAWS.pdf"), new URL("http://www.freedomscientific.com/Downloads/JAWS"));
 			keys = testWebs.keySet();
 			for (File file : keys) {
 				int size = HTMLToPDFConverter.htmlToPDF(testWebs.get(file), new FileOutputStream(file));
