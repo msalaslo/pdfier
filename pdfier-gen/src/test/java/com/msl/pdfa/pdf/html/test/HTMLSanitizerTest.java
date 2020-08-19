@@ -10,12 +10,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.msl.pdfa.pdf.TestUtil;
-import com.msl.pdfa.pdf.html.HTMLSanitiser;
+import com.msl.pdfa.pdf.html.HTMLSanitizer;
 import com.msl.pdfa.pdf.io.IOUtils;
 
 import net.htmlparser.jericho.HTMLElementName;
 
-public class HTMLSanitiserTest {
+public class HTMLSanitizerTest {
 	
 	private static final Set<String> HTML_ELEMENTS_TO_STRIP = new HashSet<String>(Arrays.asList(new String[] {
 			HTMLElementName.SCRIPT,	HTMLElementName.META,	
@@ -25,7 +25,7 @@ public class HTMLSanitiserTest {
 	public void testSanitizeConfirmationPage(){
 		try{				
 			InputStream html = TestUtil.getInputHtml();
-			String htmlSanitized = HTMLSanitiser.stripInvalidMarkup(IOUtils.getStringFromInputStream(html),HTML_ELEMENTS_TO_STRIP);
+			String htmlSanitized = HTMLSanitizer.stripInvalidMarkup(IOUtils.getStringFromInputStream(html),HTML_ELEMENTS_TO_STRIP);
 
 			File file = new File(TestUtil.getTestPath() + "testSanitizeConfirmationPage.html");
 			File resultFile = IOUtils.stringToFile(htmlSanitized, file);

@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.msl.pdfa.pdf.TestUtil;
 import com.msl.pdfa.pdf.commons.Constants;
 import com.msl.pdfa.pdf.html.HTMLPrintableUtil;
-import com.msl.pdfa.pdf.html.HTMLSanitiser;
+import com.msl.pdfa.pdf.html.HTMLSanitizer;
 import com.msl.pdfa.pdf.io.IOUtils;
 
 import net.htmlparser.jericho.HTMLElementName;
@@ -28,7 +28,7 @@ public class HTMLPrintableUtilTest {
 	public void testRemoveElementByAttrValuePage(){
 		try{				
 			InputStream html = TestUtil.getInputHtml();
-			String htmlSanitized = HTMLSanitiser.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), HTML_ELEMENTS_TO_STRIP);
+			String htmlSanitized = HTMLSanitizer.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), HTML_ELEMENTS_TO_STRIP);
 			
 			//Main test
 			String htmlModified = HTMLPrintableUtil.removeElementByAttr(htmlSanitized, "id", "tabPanel2");
@@ -47,7 +47,7 @@ public class HTMLPrintableUtilTest {
 	public void testAddInlineCSS() {
 		try{			
 			InputStream html = TestUtil.getInputHtml();
-			String htmlSanitized = HTMLSanitiser.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), Constants.HTML_ELEMENTS_TO_STRIP);
+			String htmlSanitized = HTMLSanitizer.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), Constants.HTML_ELEMENTS_TO_STRIP);
 			String htmlCssInLine = HTMLPrintableUtil.addInlineStyleSheets(IOUtils.getInputStream(htmlSanitized), Constants.CSS_FILES);
 			
 			File file = new File(TestUtil.getTestPath() + "testAddInlineCSS.html");
@@ -65,7 +65,7 @@ public class HTMLPrintableUtilTest {
 	public void testMoveStyleToHead() {
 		try{			
 			InputStream html = TestUtil.getInputHtml();
-			String htmlSanitized = HTMLSanitiser.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), Constants	.HTML_ELEMENTS_TO_STRIP);
+			String htmlSanitized = HTMLSanitizer.stripInvalidMarkup(IOUtils.getStringFromInputStream(html), Constants	.HTML_ELEMENTS_TO_STRIP);
 			String htmlCssInLine = HTMLPrintableUtil.moveStyleToHead(htmlSanitized);
 			
 			File file = new File(TestUtil.getTestPath() + "testMoveStyleToHead.html");

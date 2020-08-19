@@ -21,7 +21,7 @@ public class HTMLTidier {
 			} catch (Exception ex) {
 				logger.warn("Error adding external CSS to inline doc." + ex.getMessage());
 			}
-			htmlTidied = HTMLSanitiser.stripInvalidMarkup(htmlTidied, Constants.HTML_ELEMENTS_TO_STRIP);
+			htmlTidied = HTMLSanitizer.stripInvalidMarkup(htmlTidied, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(sourceUrl, htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.addCDATAToHeadStyleTags(htmlTidied);	
@@ -34,7 +34,7 @@ public class HTMLTidier {
 	
 	public static String getHTMLTidied(URL requestUrl, String inputHTML) throws PdfUAGenerationException {
 		try {
-			String htmlTidied = HTMLSanitiser.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
+			String htmlTidied = HTMLSanitizer.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.addExternalInlineStyleSheets(requestUrl, htmlTidied);
@@ -47,7 +47,7 @@ public class HTMLTidier {
 
 	public static String getHTMLTidied(String inputHTML) throws PdfUAGenerationException {
 		try {
-			String htmlTidied = HTMLSanitiser.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
+			String htmlTidied = HTMLSanitizer.stripInvalidMarkup(inputHTML, Constants.HTML_ELEMENTS_TO_STRIP);
 			htmlTidied = HTMLPrintableUtil.addMandatoryHtml(htmlTidied);	
 			htmlTidied = HTMLPrintableUtil.moveStyleToHead(htmlTidied);;	
 //			htmlTidied = HTMLPrintableUtil.addInlineStyleSheets(IOUtils.getInputStream(htmlTidied), CSS_FILES);		

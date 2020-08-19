@@ -28,6 +28,8 @@ public class HTMLToPDFConverter {
 	
 	private static boolean sanitizePdf = false;
 	
+	private static boolean addLocalFonts = false;
+	
 	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverter.class);
 
 	public static final String[] FONTS = { "ARIAL.TTF" };
@@ -111,7 +113,9 @@ public class HTMLToPDFConverter {
 			callback.setSharedContext(renderer.getSharedContext());
 			renderer.getSharedContext().setUserAgentCallback(callback);
 			renderer.setPDFVersion(PdfWriter.VERSION_1_7);
-			addFonts(renderer);
+			if(addLocalFonts) {
+				addFonts(renderer);
+			}
 			renderer.setDocumentFromString(htmlTidied, basePath);
 			renderer.layout();
 			if(sanitizePdf){

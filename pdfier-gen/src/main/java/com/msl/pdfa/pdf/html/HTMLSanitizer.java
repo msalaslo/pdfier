@@ -20,11 +20,11 @@ import net.htmlparser.jericho.StartTagType;
 import net.htmlparser.jericho.Tag;
 
 /**
- * Provides facilities to sanitise HTML containing unwanted or invalid tags into
+ * Provides facilities to sanitize HTML containing unwanted or invalid tags into
  * clean HTML.
  */
-public class HTMLSanitiser {
-	private HTMLSanitiser() {
+public class HTMLSanitizer {
+	private HTMLSanitizer() {
 	} // not instantiable
 
 	// list of HTML attributes that will be retained in the final output:
@@ -34,12 +34,11 @@ public class HTMLSanitiser {
 	private static final Object VALID_MARKER = new Object();
 
 	/**
-	 * Returns a sanitised version of the specified HTML, encoding any unwanted
+	 * Returns a sanitized version of the specified HTML, encoding any unwanted
 	 * tags.
 	 * 
-	 * @param pseudoHTML
-	 *            The potentially invalid HTML to sanitise.
-	 * @return a sanitised version of the specified HTML, encoding any unwanted
+	 * @param pseudoHTML The potentially invalid HTML to sanitize.
+	 * @return a sanitized version of the specified HTML, encoding any unwanted
 	 *         tags.
 	 */
 	public static String encodeInvalidMarkup(String pseudoHTML) {
@@ -47,60 +46,55 @@ public class HTMLSanitiser {
 	}
 
 	/**
-	 * Returns a sanitised version of the specified HTML, encoding any unwanted
+	 * Returns a sanitized version of the specified HTML, encoding any unwanted
 	 * tags.
 	 * <p>
-	 * Encoding unwanted and invalid tags results in them appearing verbatim in
-	 * the rendered output, helping to highlight the problem so that the source
-	 * HTML can be fixed.
+	 * Encoding unwanted and invalid tags results in them appearing verbatim in the
+	 * rendered output, helping to highlight the problem so that the source HTML can
+	 * be fixed.
 	 * <p>
 	 * Specifying a value of <code>true</code> as an argument to the
-	 * <code>formatWhiteSpace</code> parameter results in the formatting of
-	 * white space as described in the sanitisation process in the class
-	 * description above.
+	 * <code>formatWhiteSpace</code> parameter results in the formatting of white
+	 * space as described in the sanitization process in the class description
+	 * above.
 	 * 
-	 * @param pseudoHTML
-	 *            The potentially invalid HTML to sanitise.
-	 * @param formatWhiteSpace
-	 *            Specifies whether white space should be marked up in the
-	 *            output.
-	 * @return a sanitised version of the specified HTML, encoding any unwanted
+	 * @param pseudoHTML       The potentially invalid HTML to sanitize.
+	 * @param formatWhiteSpace Specifies whether white space should be marked up in
+	 *                         the output.
+	 * @return a sanitized version of the specified HTML, encoding any unwanted
 	 *         tags.
 	 */
 	public static String encodeInvalidMarkup(String pseudoHTML, boolean formatWhiteSpace) {
-		return sanitise(pseudoHTML, formatWhiteSpace, false, null);
+		return sanitize(pseudoHTML, formatWhiteSpace, false, null);
 	}
 
 	/**
-	 * Returns a sanitised version of the specified HTML, stripping any unwanted
+	 * Returns a sanitized version of the specified HTML, stripping any unwanted
 	 * tags.
 	 * 
-	 * @param pseudoHTML
-	 *            The potentially invalid HTML to sanitise.
-	 * @return a sanitised version of the specified HTML, stripping any unwanted
+	 * @param pseudoHTML The potentially invalid HTML to sanitize.
+	 * @return a sanitized version of the specified HTML, stripping any unwanted
 	 *         tags.
 	 */
 	public static String stripInvalidMarkup(String pseudoHTML, Set<String> elementsToStrip) {
-		return sanitise(pseudoHTML, false, true, elementsToStrip);
+		return sanitize(pseudoHTML, false, true, elementsToStrip);
 	}
 
 	/**
-	 * Returns a sanitised version of the specified HTML, stripping any unwanted
+	 * Returns a sanitized version of the specified HTML, stripping any unwanted
 	 * tags.
 	 * 
-	 * @param pseudoHTML
-	 *            The potentially invalid HTML to sanitise.
-	 * @param formatWhiteSpace
-	 *            Specifies whether white space should be marked up in the
-	 *            output.
-	 * @return a sanitised version of the specified HTML, stripping any unwanted
+	 * @param pseudoHTML       The potentially invalid HTML to sanitize.
+	 * @param formatWhiteSpace Specifies whether white space should be marked up in
+	 *                         the output.
+	 * @return a sanitized version of the specified HTML, stripping any unwanted
 	 *         tags.
 	 */
 	public static String stripInvalidMarkup(String pseudoHTML, boolean formatWhiteSpace) {
-		return sanitise(pseudoHTML, formatWhiteSpace, true, null);
+		return sanitize(pseudoHTML, formatWhiteSpace, true, null);
 	}
 
-	private static String sanitise(String pseudoHTML, boolean formatWhiteSpace, boolean stripInvalidElements,
+	private static String sanitize(String pseudoHTML, boolean formatWhiteSpace, boolean stripInvalidElements,
 			Set<String> elementsToStrip) {
 		Source source = new Source(pseudoHTML);
 		source.fullSequentialParse();
@@ -155,7 +149,7 @@ public class HTMLSanitiser {
 					return false; // reject invalid LI tags
 				if (element.getEndTag() == null)
 					// insert optional end tag if it is missing
-					outputDocument.insert(element.getEnd(), getEndTagHTML(elementName)); 
+					outputDocument.insert(element.getEnd(), getEndTagHTML(elementName));
 			}
 			outputDocument.replace(tag, getStartTagHTML(element.getStartTag()));
 		} else if (tag.getTagType() == EndTagType.NORMAL) {
@@ -178,7 +172,7 @@ public class HTMLSanitiser {
 		if (parentElement.getStartTag().getUserData() != VALID_MARKER)
 			return false; // ignore LI elements who's parent is not valid
 		// only accept LI tags who's immediate parent is UL or OL.
-		return parentElement.getName() == HTMLElementName.UL || parentElement.getName() == HTMLElementName.OL; 
+		return parentElement.getName() == HTMLElementName.UL || parentElement.getName() == HTMLElementName.OL;
 	}
 
 	private static void reencodeTextSegment(Source source, OutputDocument outputDocument, int begin, int end,
