@@ -1,4 +1,4 @@
-package com.msl.pdfa.pdf.gen;
+package com.msl.pdfier.openpdf.gen.pdf.gen;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,17 +12,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.msl.pdfa.pdf.commons.Constants;
-import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
-import com.msl.pdfa.pdf.html.HTMLPrintableUtil;
-import com.msl.pdfa.pdf.html.HTMLTidier;
-import com.msl.pdfa.pdf.html.JsoupTidier;
-import com.msl.pdfa.pdf.io.IOUtils;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfWriter;
+import com.msl.pdfier.openpdf.gen.commons.Constants;
+import com.msl.pdfier.openpdf.gen.exceptions.PdfUAGenerationException;
+import com.msl.pdfier.openpdf.gen.exceptions.pdf.html.HTMLPrintableUtil;
+import com.msl.pdfier.openpdf.gen.exceptions.pdf.html.HTMLTidier;
+import com.msl.pdfier.openpdf.gen.exceptions.pdf.html.JsoupTidier;
+import com.msl.pdfier.openpdf.gen.pdf.io.IOUtils;
 
-public class HTMLToPDFConverter {
+public class OpenPdfHTMLToPDFConverter {
 
 	private static boolean createDebugFiles = false;
 	
@@ -30,7 +30,7 @@ public class HTMLToPDFConverter {
 	
 	private static boolean addLocalFonts = false;
 	
-	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverter.class);
+	private static Logger logger = LoggerFactory.getLogger(OpenPdfHTMLToPDFConverter.class);
 
 	public static final String[] FONTS = { "ARIAL.TTF" };
 
@@ -143,7 +143,7 @@ public class HTMLToPDFConverter {
 
 	private static String getBasePath() {
 		String path = null;
-		URL baseResource = HTMLToPDFConverter.class.getClassLoader().getResource(Constants.CSS_FILES);
+		URL baseResource = OpenPdfHTMLToPDFConverter.class.getClassLoader().getResource(Constants.CSS_FILES);
 		if (baseResource != null) {
 			path = baseResource.getPath();
 			int pos = path.indexOf(Constants.CSS_FILES);

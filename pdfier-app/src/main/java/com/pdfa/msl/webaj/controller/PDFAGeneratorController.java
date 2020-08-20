@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
-import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
+import com.pdfier.service.pdf.PDFGenService;
 
 @Controller
-@RequestMapping("/pdfier-app")
 public class PDFAGeneratorController {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public PDFAGeneratorController() {
-	}
+	@Autowired
+	private PDFGenService pdfGenService;
 
 	@RequestMapping(value = { "/pdfuafromurl" }, produces = { "application/pdf" })
 	public void pdfUAFromUrl(@RequestParam(value = "url", required = true) String url,
@@ -89,12 +89,12 @@ public class PDFAGeneratorController {
 	}
 
 	private int generateAndWritePDF(URL sourceUrl, OutputStream out) throws IOException, PdfUAGenerationException {
-		return HTMLToPDFConverter.htmlToPDF(sourceUrl, out);
+		return pdfGenService.generateAndWritePDF(sourceUrl, out);
 	}
 
-	private int generateAndWritePDF(URL requestUrl, String html, OutputStream out)
+	private int generateAndWritePDF(URL sourceUrl, String html, OutputStream out)
 			throws IOException, PdfUAGenerationException {
-		return HTMLToPDFConverter.htmlToPDF(requestUrl, html, out);
+		return pdfGenService.generateAndWritePDF(sourceUrl, html, out);
 	}
 
 	private void configureResponse(HttpServletResponse response, int contentLenght, String fileName, boolean inline)
