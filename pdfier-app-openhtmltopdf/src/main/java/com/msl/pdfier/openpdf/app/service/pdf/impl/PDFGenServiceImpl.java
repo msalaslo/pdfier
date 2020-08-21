@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.msl.pdfier.commons.exception.PdfierException;
 import com.msl.pdfier.openpdf.app.service.pdf.PDFGenService;
 import com.msl.pdfier.openpdf.app.service.pdf.exception.ServiceException;
-import com.msl.pdfier.openpdf.gen.pdf.gen.OpenPdfHTMLToPDFConverter;
+import com.msl.pdfier.openpdf.gen.pdf.OpenPdfHTMLToPDFConverter;
 
 @Service
 public class PDFGenServiceImpl implements PDFGenService {

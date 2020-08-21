@@ -1,4 +1,4 @@
-package com.msl.pdfier.openpdf.gen.pdf.gen;
+package com.msl.pdfier.openpdf.gen.pdf;
 
 import java.io.IOException;
 import java.io.InputStream;

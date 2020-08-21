@@ -1,0 +1,4 @@
+html-to-pdf:
+    pdf-ua-accessibility: false
+    save-generated-pdf: true
+    add-local-fonts: false

@@ -1,4 +1,4 @@
-package com.msl.pdfier.openpdf.gen.pdf.gen;
+package com.msl.pdfier.openpdf.gen.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -8,26 +8,27 @@ import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.msl.pdfier.commons.exception.PdfierException;
 import com.msl.pdfier.commons.io.IOUtils;
 import com.msl.pdfier.commons.pdf.AbstractHtmlToPdfGenerator;
 import com.msl.pdfier.openpdf.gen.commons.Constants;
+import com.msl.pdfier.openpdf.gen.config.HtmlToPdfConfiguration;
 import com.openhtmltopdf.mathmlsupport.MathMLDrawer;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.svgsupport.BatikSVGDrawer;
 
 @Component
 public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
-
-	private static boolean saveGeneratedPDF = true;
-
-	private static boolean addLocalFonts = false;
-	
-	private static Logger logger = LoggerFactory.getLogger(OpenPdfHTMLToPDFConverter.class);
+		
+	private Logger logger = LoggerFactory.getLogger(OpenPdfHTMLToPDFConverter.class);
 
 	public static final String[] FONTS = { "ARIAL.TTF" };
+	
+	@Autowired
+	HtmlToPdfConfiguration configuration;
 
 
 	/**
@@ -47,6 +48,10 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 		try {
 			PdfRendererBuilder builder = new PdfRendererBuilder();
 			builder.useFastMode();
+			
+			//Activate PDF/UA
+			builder.usePdfUaAccessbility(configuration.isPdfUaAccessibility());
+			
 			// Set OkHttp Client recommended
 			builder.useHttpStreamImplementation(new OkHttpStreamFactory());
 
@@ -57,7 +62,7 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 			builder.useMathMLDrawer(new MathMLDrawer());
 
 			// Add local fonts, if needed
-			if (addLocalFonts) {
+			if (configuration.isAddLocalFonts()) {
 				addFonts(builder);
 			}
 
@@ -68,7 +73,7 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 			// From byteArray to OutputStream
 			size = baos.size();
 			baos.writeTo(outPDF);
-			if(saveGeneratedPDF) {
+			if(configuration.isSaveGeneratedPDF()) {
 				saveToFile(baos);
 			}
 			return size;
@@ -94,11 +99,11 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 		return path;
 	}
 
-	private static String getFontPath(String fontName) {
+	private String getFontPath(String fontName) {
 		return Constants.FONT_DIR + fontName;
 	}
 
-	private static void addFonts(PdfRendererBuilder builder) throws IOException {
+	private void addFonts(PdfRendererBuilder builder) throws IOException {
 		for (int i = 0; i < FONTS.length; i++) {
 			String path = getFontPath(FONTS[i]);
 			// Uses the shorthand method, assumes normal weight and style and subset set to
