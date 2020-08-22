@@ -1,0 +1,4 @@
+html-to-pdf-generation:
+    save-generated-pdf: true
+    add-local-fonts: false
+    sanitize-pdf: false

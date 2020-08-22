@@ -1,20 +1,20 @@
-package com.msl.pdfa.pdf.gen;
+package com.msl.pdfier.openpdf.gen.pdf;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PRStream;
-import com.itextpdf.text.pdf.PdfArray;
-import com.itextpdf.text.pdf.PdfDictionary;
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfObject;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.PdfString;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PRStream;
+import com.lowagie.text.pdf.PdfArray;
+import com.lowagie.text.pdf.PdfDictionary;
+import com.lowagie.text.pdf.PdfName;
+import com.lowagie.text.pdf.PdfObject;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfString;
 
-public class PDFAccessibleSanitiser {
+public class PDFAccessibleSanitizer {
 
 	public static void manipulatePdf(InputStream src, OutputStream dest) throws IOException, DocumentException {
 		PdfReader reader = new PdfReader(src);
@@ -32,7 +32,7 @@ public class PDFAccessibleSanitiser {
 		if (PdfName.LI.equals(element.get(PdfName.S))) {
 			//If has no Kids is an empty LI
 			if(element.get(PdfName.K) == null){
-				element.clear();
+				//TODO element.clear();
 			}
 		}else if (PdfName.FIGURE.equals(element.get(PdfName.S))) {
 			if(element.get(PdfName.ALT) == null || (element.get(PdfName.ALT) != null && element.get(PdfName.ALT).length() < 1)){

@@ -63,7 +63,7 @@ public class HTMLPrintableUtil {
 		Source source = new Source(html);
 		return getMainContent(source, mainContentAttribute);
 	}
-
+	
 	private static String getMainContent(Source source, String mainContentAttribute) throws PdfierException {
 		try {
 			Element htmlElement = source.getFirstElement(HTMLElementName.HTML);

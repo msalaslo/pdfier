@@ -1,4 +1,4 @@
-package com.msl.pdfier.openpdf.gen.pdf.gen;
+package com.msl.pdfier.pdfua.gen.pdf;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextOutputDevice;
 import org.xhtmlrenderer.pdf.ITextUserAgent;
 
-import com.msl.pdfier.openpdf.gen.commons.Constants;
+import com.msl.pdfier.pdfua.gen.commons.Constants;
 
 class ResourceLoaderUserAgent extends ITextUserAgent {
 

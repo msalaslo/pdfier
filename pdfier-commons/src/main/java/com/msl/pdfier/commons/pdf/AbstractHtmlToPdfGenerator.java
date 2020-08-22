@@ -19,11 +19,9 @@ import com.msl.pdfier.commons.io.IOUtils;
 
 public abstract class AbstractHtmlToPdfGenerator {
 
-	boolean createDebugFiles = false;
+	public boolean createDebugFiles = false;
 
-	boolean saveGeneratedPDF = true;
-
-	public String debugTempFilesPath = "c:\\temp\\pdfa-test";
+	public String debugTempFilesPath = "c:\\temp\\pdfier-";
 
 	private static Logger logger = LoggerFactory.getLogger(AbstractHtmlToPdfGenerator.class);
 
@@ -31,6 +29,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(requestURL, inputHTML);
 			Document document = JsoupTidier.parse(htmlTidied);
+			JsoupTidier.addHTMLNameSpaces(document);
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
@@ -48,12 +47,13 @@ public abstract class AbstractHtmlToPdfGenerator {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(url);
 			Document document = JsoupTidier.parse(htmlTidied);
+			JsoupTidier.addHTMLNameSpaces(document);
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.compactSource(htmlTidied);
 			htmlTidied = HTMLPrintableUtil.removeBlanksBetweenTags(htmlTidied);
-			if (true) {
+			if (createDebugFiles) {
 				IOUtils.stringToFile(htmlTidied, new File(debugTempFilesPath + System.currentTimeMillis() + ".html"));
 			}
 			return generatePDFFromHTML(url.toString(), htmlTidied, outPDF, language);
@@ -67,6 +67,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(inputHTML);
 			Document document = JsoupTidier.parse(htmlTidied);
+			JsoupTidier.addHTMLNameSpaces(document);
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
@@ -105,7 +106,8 @@ public abstract class AbstractHtmlToPdfGenerator {
 
 	public void saveToFile(ByteArrayOutputStream baos) {
 		FileOutputStream fos = null;
-		String filePath = debugTempFilesPath + System.currentTimeMillis() + ".pdf";
+		String filePath = debugTempFilesPath + this.getClass().getSimpleName() +  System.currentTimeMillis() + ".pdf";
+		logger.info("Saving PDF in:" + filePath);
 		try {
 			fos = new FileOutputStream(new File(filePath));
 			baos.writeTo(fos);

@@ -21,9 +21,9 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.svgsupport.BatikSVGDrawer;
 
 @Component
-public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
+public class OpenHtmlToPdfConverter extends AbstractHtmlToPdfGenerator{
 		
-	private Logger logger = LoggerFactory.getLogger(OpenPdfHTMLToPDFConverter.class);
+	private Logger logger = LoggerFactory.getLogger(OpenHtmlToPdfConverter.class);
 
 	public static final String[] FONTS = { "ARIAL.TTF" };
 	
@@ -73,7 +73,8 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 			// From byteArray to OutputStream
 			size = baos.size();
 			baos.writeTo(outPDF);
-			if(configuration.isSaveGeneratedPDF()) {
+			logger.debug("Save PDF generated:" + configuration.isSaveGeneratedPdf());
+			if(configuration.isSaveGeneratedPdf()) {
 				saveToFile(baos);
 			}
 			return size;
@@ -88,7 +89,7 @@ public class OpenPdfHTMLToPDFConverter extends AbstractHtmlToPdfGenerator{
 	@Override
 	public String getLocalBasePath() {
 		String path = null;
-		URL baseResource = OpenPdfHTMLToPDFConverter.class.getClassLoader().getResource(Constants.CSS_FILES);
+		URL baseResource = OpenHtmlToPdfConverter.class.getClassLoader().getResource(Constants.CSS_FILES);
 		if (baseResource != null) {
 			path = baseResource.getPath();
 			int pos = path.indexOf(Constants.CSS_FILES);

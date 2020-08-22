@@ -20,6 +20,7 @@ import org.xhtmlrenderer.util.XRLog;
 
 import com.msl.pdfa.pdf.TestUtil;
 import com.msl.pdfier.commons.io.IOUtils;
+import com.msl.pdfier.pdfua.gen.pdf.FlyingSaucerPdfUaHTMLToPDFConverter;
 
 @SpringBootTest
 public class HTMLToPDFConverterTest {
@@ -27,7 +28,7 @@ public class HTMLToPDFConverterTest {
 	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverterTest.class);
 
 	@Autowired
-	HTMLToPDFConverter htmlToPdfConverter;
+	FlyingSaucerPdfUaHTMLToPDFConverter htmlToPdfConverter;
 
 	public void setUp() {
 		System.getProperties().setProperty("xr.util-logging.loggingEnabled", "false");

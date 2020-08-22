@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import org.xhtmlrenderer.util.XRLog;
 
 import com.msl.pdfa.pdf.TestUtil;
+import com.msl.pdfier.pdfua.gen.pdf.PDFAccessibleSanitiser;
 
 public class PDFAccessibleSanitiserTest {
 	

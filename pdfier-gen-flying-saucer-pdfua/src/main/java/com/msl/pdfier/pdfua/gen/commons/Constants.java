@@ -1,4 +1,4 @@
-package com.msl.pdfa.pdf.commons;
+package com.msl.pdfier.pdfua.gen.commons;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,0 +1,5 @@
+html-to-pdf-generation:
+    #WIP does not work properly, HTML sould be perfectly accessible
+    pdf-ua-accessibility: false
+    save-generated-pdf: true
+    add-local-fonts: false

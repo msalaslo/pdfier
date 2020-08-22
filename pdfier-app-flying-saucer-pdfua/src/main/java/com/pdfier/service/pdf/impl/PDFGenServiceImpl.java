@@ -6,9 +6,9 @@ import java.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
-import com.msl.pdfa.pdf.gen.HTMLToPDFConverter;
 import com.msl.pdfier.commons.exception.PdfierException;
+import com.msl.pdfier.pdfua.gen.exception.PdfUAGenerationException;
+import com.msl.pdfier.pdfua.gen.pdf.FlyingSaucerPdfUaHTMLToPDFConverter;
 import com.pdfier.service.exception.ServiceException;
 import com.pdfier.service.pdf.PDFGenService;
 
@@ -16,7 +16,7 @@ import com.pdfier.service.pdf.PDFGenService;
 public class PDFGenServiceImpl implements PDFGenService {
 	
 	@Autowired
-	HTMLToPDFConverter hthmlToPdfconverter;
+	FlyingSaucerPdfUaHTMLToPDFConverter hthmlToPdfconverter;
 
 	@Override
 	public int generateAndWritePDF(URL sourceUrl, OutputStream out) throws ServiceException {

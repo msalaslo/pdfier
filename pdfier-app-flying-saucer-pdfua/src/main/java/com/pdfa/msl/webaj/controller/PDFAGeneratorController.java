@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.msl.pdfa.pdf.exception.PdfUAGenerationException;
+import com.msl.pdfier.pdfua.gen.exception.PdfUAGenerationException;
 import com.pdfier.service.pdf.PDFGenService;
 
 @Controller

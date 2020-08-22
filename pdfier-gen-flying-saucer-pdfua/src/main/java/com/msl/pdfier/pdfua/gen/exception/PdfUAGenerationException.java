@@ -1,4 +1,4 @@
-package com.msl.pdfa.pdf.exception;
+package com.msl.pdfier.pdfua.gen.exception;
 
 public class PdfUAGenerationException extends Exception {
 
