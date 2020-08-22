@@ -25,9 +25,9 @@ public abstract class AbstractHtmlToPdfGenerator {
 
 	private static Logger logger = LoggerFactory.getLogger(AbstractHtmlToPdfGenerator.class);
 
-	public int htmlToPDF(URL requestURL, String inputHTML, OutputStream outPDF) throws PdfierException {
+	public int htmlToPDF(URL url, String inputHTML, OutputStream outPDF) throws PdfierException {
 		try {
-			String htmlTidied = HTMLTidier.getHTMLTidied(requestURL, inputHTML);
+			String htmlTidied = HTMLTidier.getHTMLTidied(url, inputHTML);
 			Document document = JsoupTidier.parse(htmlTidied);
 			JsoupTidier.addHTMLNameSpaces(document);
 			String language = JsoupTidier.getLanguage(document);
@@ -36,7 +36,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 			if (createDebugFiles) {
 				IOUtils.stringToFile(htmlTidied, new File(debugTempFilesPath + System.currentTimeMillis() + ".html"));
 			}
-			return generatePDFFromHTML(requestURL.toString(), htmlTidied, outPDF, language);
+			return generatePDFFromHTML(getBaseUrl(url), htmlTidied, outPDF, language);
 		} catch (Exception e) {
 			logger.error("Error converting HTML to PDF", e);
 			throw new PdfierException("Error converting HTML to PDF", e);
@@ -56,7 +56,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 			if (createDebugFiles) {
 				IOUtils.stringToFile(htmlTidied, new File(debugTempFilesPath + System.currentTimeMillis() + ".html"));
 			}
-			return generatePDFFromHTML(url.toString(), htmlTidied, outPDF, language);
+			return generatePDFFromHTML(getBaseUrl(url), htmlTidied, outPDF, language);
 		} catch (Exception e) {
 			logger.error("Error converting HTML to PDF", e);
 			throw new PdfierException("Error converting HTML to PDF", e);
@@ -106,7 +106,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 
 	public void saveToFile(ByteArrayOutputStream baos) {
 		FileOutputStream fos = null;
-		String filePath = debugTempFilesPath + this.getClass().getSimpleName() +  System.currentTimeMillis() + ".pdf";
+		String filePath = debugTempFilesPath + this.getClass().getSimpleName() + System.currentTimeMillis() + ".pdf";
 		logger.info("Saving PDF in:" + filePath);
 		try {
 			fos = new FileOutputStream(new File(filePath));
@@ -117,6 +117,17 @@ public abstract class AbstractHtmlToPdfGenerator {
 			IOUtils.silentlyCloseOutputStream(fos);
 		}
 
+	}
+
+	public static String getBaseUrl(URL url) {
+		if (url == null) {
+			return null;
+		}
+		try {
+			return url.getProtocol() + "://" + url.getAuthority() + "/";
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
