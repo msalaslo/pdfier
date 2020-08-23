@@ -59,41 +59,6 @@ public class HTMLPrintableUtil {
 		return html.replace("> <", "><");
 	}
 
-	public static String getMainContent(String html, String mainContentAttribute) throws PdfierException {
-		Source source = new Source(html);
-		return getMainContent(source, mainContentAttribute);
-	}
-	
-	private static String getMainContent(Source source, String mainContentAttribute) throws PdfierException {
-		try {
-			Element htmlElement = source.getFirstElement(HTMLElementName.HTML);
-			Element bodyElement = source.getFirstElement(HTMLElementName.BODY);
-			Element headElement = source.getFirstElement(HTMLElementName.HEAD);
-			Element divMainContentElement = source.getElementById(mainContentAttribute);
-			OutputDocument outputDocument = new OutputDocument(source);
-			StringBuilder sb = new StringBuilder();
-			if (htmlElement != null) {
-				logger.info("html element not null, parsing full HTML");
-				sb.append(htmlElement.getStartTag().toString());
-				sb.append(headElement.getStartTag().toString() + headElement.getEndTag().toString());
-				sb.append(bodyElement.getStartTag().toString());
-				sb.append(divMainContentElement.toString());
-				sb.append(bodyElement.getEndTag().toString() + htmlElement.getEndTag().toString());
-			} else {
-				logger.info("main-content div received, parsing HTML fragment");
-				sb.append("<html>");
-				sb.append("<head></head><body>");
-				sb.append(divMainContentElement.toString());
-				sb.append("</body></html>");
-			}
-			outputDocument.replace(outputDocument.getSegment(), sb.toString());
-			return outputDocument.toString();
-		} catch (Exception e) {
-			logger.error("Error generating HTML printable", e);
-			throw new PdfierException("Error generating HTML printable", e);
-		}
-	}
-
 	public static String moveStyleToHead(String inputHTML) throws PdfierException {
 		try {
 			Source source = new Source(inputHTML);
@@ -176,7 +141,7 @@ public class HTMLPrintableUtil {
 		}
 	}
 
-	public static String addLogoFragment(String inputHTML, String attr, String logoFragmentFile) throws PdfierException {
+	protected static String addLogoFragment(String inputHTML, String attr, String logoFragmentFile) throws PdfierException {
 		try {
 			Source source = new Source(inputHTML);
 			OutputDocument outputDocument = new OutputDocument(source);
@@ -289,7 +254,7 @@ public class HTMLPrintableUtil {
 		return content;
 	}
 	
-	public static String parseImages(URL sourceUrl, String inputHTML) throws Exception {
+	protected static String parseImages(URL sourceUrl, String inputHTML) throws Exception {
 		Source source = new Source(inputHTML);
 		OutputDocument outputDocument = new OutputDocument(source);
 		StringBuilder sb = new StringBuilder();

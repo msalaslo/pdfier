@@ -35,4 +35,12 @@ public class JsoupTidier {
 			htmlElement.attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
 		}
 	}
+	
+	public static void addLandScapeOrientation(Document document) {
+		Elements htmlElements = document.getElementsByTag("head");
+		if(!htmlElements.isEmpty()){
+			Element htmlElement = htmlElements.get(0);
+			htmlElement.append("<style>@page { size: A4 landscape;}</style>");
+		}
+	}
 }

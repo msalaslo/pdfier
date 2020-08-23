@@ -25,11 +25,14 @@ public abstract class AbstractHtmlToPdfGenerator {
 
 	private static Logger logger = LoggerFactory.getLogger(AbstractHtmlToPdfGenerator.class);
 
-	public int htmlToPDF(URL url, String inputHTML, OutputStream outPDF) throws PdfierException {
+	public int htmlToPDF(URL url, String inputHTML, OutputStream outPDF, boolean landScape) throws PdfierException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(url, inputHTML);
 			Document document = JsoupTidier.parse(htmlTidied);
 			JsoupTidier.addHTMLNameSpaces(document);
+			if(landScape) {
+				JsoupTidier.addLandScapeOrientation(document);
+			}
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
@@ -43,11 +46,14 @@ public abstract class AbstractHtmlToPdfGenerator {
 		}
 	}
 
-	public int htmlToPDF(URL url, OutputStream outPDF) throws PdfierException {
+	public int htmlToPDF(URL url, OutputStream outPDF, boolean landScape) throws PdfierException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(url);
 			Document document = JsoupTidier.parse(htmlTidied);
 			JsoupTidier.addHTMLNameSpaces(document);
+			if(landScape) {
+				JsoupTidier.addLandScapeOrientation(document);
+			}
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
@@ -63,11 +69,14 @@ public abstract class AbstractHtmlToPdfGenerator {
 		}
 	}
 
-	public int htmlToPDF(String inputHTML, OutputStream outPDF) throws PdfierException {
+	public int htmlToPDF(String inputHTML, OutputStream outPDF, boolean landScape) throws PdfierException {
 		try {
 			String htmlTidied = HTMLTidier.getHTMLTidied(inputHTML);
 			Document document = JsoupTidier.parse(htmlTidied);
 			JsoupTidier.addHTMLNameSpaces(document);
+			if(landScape) {
+				JsoupTidier.addLandScapeOrientation(document);
+			}
 			String language = JsoupTidier.getLanguage(document);
 			htmlTidied = JsoupTidier.getUTF8String(document);
 			htmlTidied = HTMLPrintableUtil.replaceNbsp(htmlTidied);
