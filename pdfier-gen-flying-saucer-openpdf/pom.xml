@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.msl.pdfier</groupId>
+	<groupId>io.github.msalaslo</groupId>
 	<version>1.0.0</version>
 	<artifactId>pdfier-gen-flying-saucer-openpdf</artifactId>
 	<name>PDFIER-Generator-FS-OpenPDF</name>
@@ -16,7 +16,7 @@
 	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -63,7 +63,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.msl.pdfier</groupId>
+			<groupId>io.github.msalaslo</groupId>
 			<artifactId>pdfier-commons</artifactId>
 			<version>1.0.0</version>
 		</dependency>
