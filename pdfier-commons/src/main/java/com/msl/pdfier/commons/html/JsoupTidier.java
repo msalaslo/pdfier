@@ -23,7 +23,7 @@ public class JsoupTidier {
     }
 	
 	/**
-	 * Adds needed name spaces to the <html> tag
+	 * Adds needed name spaces to the html tag
 	 * Useful to avoid error: "he prefix xlink for attribute xlink:href associated with an element ... is not bound"
 	 * @param document modified
 	 */

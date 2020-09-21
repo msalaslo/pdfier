@@ -6,17 +6,72 @@
 
 	<groupId>io.github.msalaslo</groupId>
 	<artifactId>pdfier-parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>pom</packaging>
 
-	<name>pdfier-parent</name>
+	<name>PDFier application for transfor URLs to PDF/UA</name>
+	<description>PDFier application for transfor URLs to PDF/UA. Based on Flying Saucer PDF/UA (FS). FS is a CSS 2.1 renderer written in Java.  It supports Java2D, PDF, and SWT output. It generates PDF/UA documents</description>
+
+
+	<url>https://github.com/msalaslo/pdfier.git</url>
+
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License (LGPL), version 2.1 or later</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+		</license>
+	</licenses>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 	</properties>
 
+	<!-- msl -->
+	<scm>
+		<connection>https://github.com/msalaslo/pdfier.git</connection>
+		<developerConnection>https://github.com/msalaslo/pdfier.git</developerConnection>
+		<url>https://github.com/msalaslo/pdfier.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+
+	<!-- msl -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<!-- msl -->
+	<developers>
+		<developer>
+			<id>msalaslo</id>
+			<name>Miguel Salas</name>
+			<email>msalaslo@gmail.com</email>
+		</developer>
+	</developers>
+	
+	<profiles>
+		<profile>
+			<id>doclint-java8-disable</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
+	</profiles>
+	
 	<build>
 		<finalName>pdfier</finalName>
 		<plugins>
@@ -32,6 +87,66 @@
 					<compilerVersion>${java.version}</compilerVersion>
 				</configuration>
 			</plugin>
+
+			<!-- msl -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<source>11</source>
+					<additionalparam>${javadoc.opts}</additionalparam>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 	<modules>
@@ -42,6 +157,5 @@
 		<module>pdfier-app-flying-saucer-pdfua</module>
 		<module>pdfier-app-flying-saucer-openpdf</module>
 		<module>pdfier-app-openhtmltopdf</module>
-		<module>pdfier-front</module>
 	</modules>
 </project>

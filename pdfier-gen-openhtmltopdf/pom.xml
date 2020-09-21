@@ -2,23 +2,43 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.github.msalaslo</groupId>
-	<version>1.0.0</version>
 	<artifactId>pdfier-gen-openhtmltopdf</artifactId>
 	<name>PDFA Generator openhtmltopdf</name>
 	<packaging>jar</packaging>
 	<description>PDFA Generator based on openhtmltopdf</description>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
+
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>11</java.version>
 		<openhtml.version>1.0.4</openhtml.version>
 	</properties>
+	<parent>
+		<groupId>io.github.msalaslo</groupId>
+		<artifactId>pdfier-parent</artifactId>
+		<version>1.0.1</version>
+	</parent>
+
+	<!-- msl -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.3.3.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -130,8 +150,18 @@
 		<dependency>
 			<groupId>io.github.msalaslo</groupId>
 			<artifactId>pdfier-commons</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<finalName>pdfier-app-openhtmltopdf</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -38,7 +38,7 @@ public class OpenHtmlToPdfConverter extends AbstractHtmlToPdfGenerator{
 	 * @param outPDF the outputStream to write the PDF
 	 * @param language document language
 	 * @return size of the result PDF
-	 * @throws Exception
+	 * @throws PdfierException if exception generating document
 	 */
 	@Override
 	public int generatePDFFromHTML(String basePath, String htmlTidied, OutputStream outPDF, String language)

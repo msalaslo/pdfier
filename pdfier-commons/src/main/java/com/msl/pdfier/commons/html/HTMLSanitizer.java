@@ -73,6 +73,7 @@ public class HTMLSanitizer {
 	 * tags.
 	 * 
 	 * @param pseudoHTML The potentially invalid HTML to sanitize.
+	 * @param elementsToStrip elements To Strip
 	 * @return a sanitized version of the specified HTML, stripping any unwanted
 	 *         tags.
 	 */
