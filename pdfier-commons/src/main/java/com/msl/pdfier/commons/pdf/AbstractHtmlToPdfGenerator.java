@@ -106,7 +106,7 @@ public abstract class AbstractHtmlToPdfGenerator {
 	 * @param outPDF     the outputStream to write the PDF
 	 * @param language   document language
 	 * @return size of the result PDF
-	 * @throws Exception
+	 * @throws PdfierException exception generating PDF
 	 */
 	public abstract int generatePDFFromHTML(String basePath, String htmlTidied, OutputStream outPDF, String language)
 			throws PdfierException;
