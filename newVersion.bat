@@ -1,1 +1,1 @@
-mvn versions:set -DnewVersion=1.0.4
+mvn versions:set -DnewVersion=1.0.6
