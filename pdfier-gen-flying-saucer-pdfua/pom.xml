@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>io.github.msalaslo</groupId>
 		<artifactId>pdfier-parent</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.4</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -82,17 +82,29 @@
 		<dependency>
 			<groupId>io.github.msalaslo</groupId>
 			<artifactId>pdfier-commons</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.4</version>
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
-		<finalName>pdfier-app-openhtmltopdf</finalName>
+		<finalName>pdfier-gen-flying-saucer-pdfua</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerVersion>${java.version}</compilerVersion>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

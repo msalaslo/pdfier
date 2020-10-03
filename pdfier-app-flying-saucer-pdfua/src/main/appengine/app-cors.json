@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://www.pdfier.com"],
+      "method": ["POST"],
+      "responseHeader": ["x-requested-with"],
+      "maxAgeSeconds": 3600
+    }
+]

@@ -12,17 +12,21 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xhtmlrenderer.util.XRLog;
 
 import com.msl.pdfier.commons.io.IOUtils;
+import com.msl.pdfier.pdfua.gen.config.HtmlToPdfConfiguration;
 import com.msl.pdfier.pdfua.gen.pdf.FlyingSaucerPdfUaHTMLToPDFConverter;
 import com.msl.pdfier.pdfua.gen.utils.test.TestUtil;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = {FlyingSaucerPdfUaHTMLToPDFConverter.class, HtmlToPdfConfiguration.class})
 public class HTMLToPDFConverterTest {
 
 	private static Logger logger = LoggerFactory.getLogger(HTMLToPDFConverterTest.class);
@@ -84,10 +88,11 @@ public class HTMLToPDFConverterTest {
 			setUp();
 			InputStream html = TestUtil.getInputHtml();
 			File fileOut = new File(TestUtil.getTestPath() + "testConfirmationPageToPDF.pdf");
+			logger.debug("testConfirmationPageToPDF:: file out path:" + fileOut.getPath());
 			FileOutputStream outPDF = new FileOutputStream(fileOut);
 			htmlToPdfConverter.htmlToPDF(IOUtils.getStringFromInputStream(html), outPDF, false);
-			System.out.println("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath());
-			logger.debug(("testConfirmationPageToPDFFlyingJericho:: PDF generado en:" + fileOut.getPath()));
+			System.out.println("testConfirmationPageToPDF:: PDF generado en:" + fileOut.getPath());
+			logger.debug(("testConfirmationPageToPDF:: PDF generado en:" + fileOut.getPath()));
 			assertNotNull(outPDF, "Confirmation PDF Flying Saurce and Jericho with CSS generated not null assertion");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,0 +1,1 @@
+mvn -DskipTests=true clean deploy -P deploy
