@@ -50,8 +50,8 @@ public class PDFAccessibleSanitizer {
      * Manipulates a PDF file src with the file dest as result
      * @param src the original PDF
      * @param dest the resulting PDF
-     * @throws IOException
-     * @throws DocumentException 
+     * @throws IOException IO exception
+     * @throws DocumentException document processing exception
      */
     public static void manipulateImagesPdf(InputStream src, OutputStream dest) throws IOException, DocumentException {
         // Read the file

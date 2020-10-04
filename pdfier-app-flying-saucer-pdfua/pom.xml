@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>io.github.msalaslo</groupId>
 		<artifactId>pdfier-parent</artifactId>
-		<version>1.0.6</version>
+		<version>1.0.9</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -69,10 +69,29 @@
 		<dependency>
 			<groupId>io.github.msalaslo</groupId>
 			<artifactId>pdfier-gen-flying-saucer-pdfua</artifactId>
-			<version>1.0.6</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
-
+	
+	<profiles>
+		<profile>
+			<id>cloud-gcp</id>
+			<build>
+				<finalName>pdfier-app-flying-saucer-openpdf-gcloud</finalName>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>appengine-maven-plugin</artifactId>
+						<version>2.4.0</version>
+						<configuration>
+							<projectId>GCLOUD_CONFIG</projectId>
+							<version>springboot-helloworld</version>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<build>
 		<finalName>pdfier-app-flying-saucer-pdfua</finalName>
@@ -99,15 +118,6 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<compilerVersion>${java.version}</compilerVersion>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<version>2.4.0</version>
-				<configuration>
-					<projectId>GCLOUD_CONFIG</projectId>
-					<version>springboot-helloworld</version>
 				</configuration>
 			</plugin>
 		</plugins>
